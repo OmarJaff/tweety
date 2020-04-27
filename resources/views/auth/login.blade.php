@@ -1,59 +1,74 @@
-@extends('layouts.app')
+ <x-master>
+<div class="bg-gray-200 w-screen h-screen">
+    <div class="flex justify-center flex-col h-full w-auto items-center">
+        <div class="max-w-md w-full">
+            <div class="flex justify-center">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <h1>
+                    <img src="/images/logo.svg" alt="Tweety logo">
+                </h1>
 
-                <div class="card-body">
+            </div>
+            <div class="w-auto">
+                <div class="justify-center flex text-gray-600 text-sm py-3 mx-2">{{ __('Login into your account') }}</div>
+
+                <div class="p-4">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="sr-only">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" placeholder="Email Address"
+                                       type="email"
+                                       class="focus:outline-none
+                                       focus:shadow-sm border
+                                       border-gray-300
+                                       rounded-t-md w-full
+                                       text-sm px-3 py-2
+                                       placeholder-gray-500 @error('email')  border-red-500 @enderror"
+                                       name="email" value="{{ old('email') }}" required  autocomplete="email" autofocus>
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-xs p-2 text-red-500 font-medium" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="sr-only">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" placeholder="Password" type="password"
+                                       class="border border-gray-300
+                                       rounded-b-md focus:outline-none
+                                       focus:shadow-sm  w-full text-sm
+                                       px-3 py-2 placeholder-gray-500 @error('password') border-red-500 @enderror" name="password" required  autocomplete="current-password">
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-xs p-2 text-red-500 font-medium" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+{{--                            <div class="col-md-6 offset-md-4">--}}
+{{--                                <div class="form-check">--}}
+{{--                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>--}}
+
+{{--                                    <label class="form-check-label" for="remember">--}}
+{{--                                        {{ __('Remember Me') }}--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        --}}
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="appearance-none relative w-full bg-blue-500 rounded-md text-center my-5 font-semibold text-white p-1  hover:bg-blue-600">
                                     {{ __('Login') }}
                                 </button>
 
@@ -62,6 +77,16 @@
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+                                <div class="relative mt-4">
+                                    <div class="absolute inset-0 flex items-center">
+                                        <div class="w-full border-t border-gray-400"></div>
+                                    </div>
+                                    <a href="{{route('register')}}">
+                                        <div class="relative flex justify-center text-sm leading-5">
+                                            <span class="px-2 bg-gray-200 text-gray-500">Don't have an account?</span>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -70,4 +95,6 @@
         </div>
     </div>
 </div>
-@endsection
+ </x-master>
+
+
