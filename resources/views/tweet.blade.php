@@ -1,4 +1,4 @@
-<div class="flex p-4 border-b border-gray-300">
+<div class="flex p-4 {{$loop->last ? '' : 'border-b border-gray-300'}}">
     <div class="mr-2  flex-shrink-0">
         <a href="{{route('profile', $tweet->user->name )}}">
             <img src="{{$tweet->user->getAvatarAttribute()}}"
