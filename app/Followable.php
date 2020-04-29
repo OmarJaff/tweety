@@ -29,4 +29,12 @@ trait Followable
     {
         return $this->follows()->where('following_user_id', $user)->exists();
     }
+
+    public function followers() {
+         return $this->belongsToMany(User::class,
+             'follows',
+             'following_user_id',
+             'user_id'
+    );
+    }
 }

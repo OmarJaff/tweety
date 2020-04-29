@@ -1,47 +1,56 @@
-@extends('components.app')
+<x-auth.header>
+                <div class="card">
+                    <div class="justify-center flex text-gray-600 text-sm py-3 mx-2" >{{ __('Reset your password') }}</div>
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                    <div class="p-4">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                        <form method="POST" action="{{ route('password.email') }}">
+                            @csrf
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
+                            <div class="p-1">
+                                <label for="email"
+                                       class="sr-only">{{ __('E-Mail Address') }}</label>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                <div class="w-full">
+                                    <input id="email" type="email"
+                                           placeholder="Your email address"
+                                           class="focus:outline-none
+                                       focus:shadow-sm border
+                                       border-gray-300
+                                       rounded-md w-full
+                                       text-sm px-3 py-2 placeholder-gray-500 @error('email')  border-red-500 @enderror" name="email"
+                                           value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                                    @error('email')
+                                    <span class="text-xs p-2 text-red-500 font-medium" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
+                            @if (session('status'))
+                                <div class="relative mt-4">
+                                    <div class="absolute inset-0 flex items-center">
+                                        <div class="w-full border-t border-green-400"></div>
+                                    </div>
+
+                                    <div class="relative flex justify-center text-sm leading-5">
+                                        <span class="px-2 bg-gray-200 text-green-500 font-medium">{{ session('status') }}</span>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit"
+                                            class="appearance-none relative w-full bg-blue-500 rounded-md text-center my-5 font-semibold text-white p-1  hover:bg-blue-600">
+                                        {{ __('Send Password Reset Link') }}
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+    </x-auth.header>

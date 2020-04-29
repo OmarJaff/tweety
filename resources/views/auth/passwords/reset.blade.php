@@ -1,65 +1,87 @@
-@extends('components.app')
+<x-auth.header>
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+                <div class="justify-center flex text-gray-600 text-lg py-3 mx-2">{{ __('Reset Your Password') }}</div>
 
-                <div class="card-body">
+                <div class="p-4">
                     <form method="POST" action="{{ route('password.update') }}">
                         @csrf
 
                         <input type="hidden" name="token" value="{{ $token }}">
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                        <div class="p-1 space-y-2">
+                            <label for="email" class="sr-only">{{ __('E-Mail Address') }}</label>
+                            <div class="w-full">
+                                <input id="email" placeholder="E-Mail Address"
+                                       type="email"
+                                       class="focus:outline-none
+                                       focus:shadow-sm border
+                                       border-gray-300
+                                       rounded-t-md w-full
+                                       text-sm px-3 py-2 placeholder-gray-500 @error('email')  border-red-500 @enderror"
+                                         name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-xs p-2 text-red-500 font-medium" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                            <label for="password" class="sr-only">{{ __('Password') }}</label>
+
+                            <div class="w-full">
+                                <input placeholder="password"
+                                       id="password"
+                                       type="password"
+                                       class="
+                                       focus:outline-none
+                                       focus:shadow-sm border
+                                       border-gray-300
+                                       border-t-0
+                                        w-full
+                                       text-sm px-3 py-2 placeholder-gray-500 @error('email')
+                                       border-red-500 @enderror"
+                                        name="password" required autocomplete="new-password">
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="text-xs p-2 text-red-500 font-medium" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="sr-only">{{ __('Confirm Password') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <div class="w-full">
+                                <input placeholder="Confirm Password"
+                                       id="password-confirm"
+                                       type="password"
+                                       name="password_confirmation"
+                                       class="focus:outline-none
+                                       focus:shadow-sm border
+                                       rounded-b-md
+                                       border-t-0
+                                       border-gray-300
+                                       md
+                                       w-full
+                                       text-sm px-3 py-2 placeholder-gray-500 @error('email')  border-red-500 @enderror"
+                                       required autocomplete="new-password">
                             </div>
-                        </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+
+                            <div class="mt-2">
+                                <button type="submit"
+                                        class=" appearance-none relative w-full bg-blue-500 rounded-md text-center my-5 font-semibold text-white p-1  hover:bg-blue-600">
                                     {{ __('Reset Password') }}
                                 </button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-@endsection
+
+    </x-auth.header>

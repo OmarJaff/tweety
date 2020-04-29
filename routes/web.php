@@ -27,11 +27,11 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/profiles/{user}/follow', 'FollowController@store');
 
-    Route::get('/profiles/{user:name}', 'ProfileController@show')->name('profile');
+    Route::get('/profiles/{user:username}', 'ProfileController@show')->name('profile');
 
-    Route::get('/profiles/{user:name}/edit', 'ProfileController@edit')->name('edit-profile');
+    Route::get('/profiles/{user:username}/edit', 'ProfileController@edit')->name('edit-profile');
 
-
+    Route::patch('/profiles/{user:username}', 'ProfileController@update');
 });
 
 
