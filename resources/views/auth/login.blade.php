@@ -1,6 +1,5 @@
 <x-auth.header>
 
-
         <div class="w-auto">
             <div class="justify-center flex text-gray-600 text-lg py-3 mx-2">{{ __('Login into your account') }}</div>
 

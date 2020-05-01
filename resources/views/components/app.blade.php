@@ -1,9 +1,14 @@
 <x-master>
     <section class="px-8 py-4 mb-6">
-        <header class="container mx-auto">
+        <header class="container mx-auto flex justify-between">
             <h1>
                 <img src="/images/logo.svg" alt="Tweety logo">
             </h1>
+{{--            <a href="{{route('logout')}}" class="text-gray-600">Log out</a>--}}
+                <form id="frm-logout" action="{{ route('logout') }}" method="POST"  >
+                    @csrf
+                    <button class="text-gray-600 outline-none focus:outline-none" type="submit">Log Out</button>
+                </form>
         </header>
     </section>
     <section class="px-8">
@@ -20,8 +25,8 @@
                 </div>
 
                   @if(auth()->check())
-                <div class="lg:w-1/5  justify-center bg-blue-100 px-6 py-4 rounded-lg">@include('friends-list')</div>
-                      @endif
+                         @include('friends-list')
+                    @endif
             </div>
         </main>
     </section>

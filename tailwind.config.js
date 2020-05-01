@@ -1,13 +1,9 @@
 module.exports = {
+  purge: ['./resources/views/components/master.blade.php'] ,
+  target: 'ie11',
   theme: {
     extend: {},
   },
-  variants: {
-      opacity: ['responsive', 'hover', 'focus', 'disabled'],
-      textColor: ['responsive', 'hover', 'focus', 'visited','disabled'],
-      disabled: ['responsive', 'hover', 'focus', 'visited','cursor-not-allowed'],
-      borderColor: ['focus', 'focus-within']
-  },
+  variants: {},
   plugins: [],
 }
-

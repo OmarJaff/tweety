@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Like;
 
 class Tweet extends Model
 {
+    use Likable;
+
     protected $fillable = ['user_id','body'];
 
 
@@ -14,5 +17,6 @@ class Tweet extends Model
     {
         return $this->belongsTo(User::class);
     }
+
 
 }
