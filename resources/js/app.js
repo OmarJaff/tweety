@@ -6,6 +6,12 @@
 
 require('./bootstrap');
 
+window.TurbolinksAdapter = require('vue-turbolinks');
+const Turbolinks = require("turbolinks");
+Turbolinks.start();
+
+
+
 window.Vue = require('vue');
 
 /**
@@ -13,13 +19,18 @@ window.Vue = require('vue');
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".
  *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ * Eg. ./components/LikeButtons.vue -> <example-component></example-component>
  */
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('like-buttons', require('./components/LikeButtons.vue').default);
+Vue.component('dislike-buttons', require('./components/DislikeButton.vue').default);
+Vue.component('timeline', require('./components/Timeline.vue').default);
+Vue.component('tweets', require('./components/Tweets.vue').default);
+
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,6 +38,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+document.addEventListener('turbolinks:load', () => {
 const app = new Vue({
     el: '#app',
+});
 });

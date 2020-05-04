@@ -21,9 +21,17 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-    Route::get('/tweets', 'TweetController@index')-> name('home');
+    Route::get('/tweets', 'TweetController@index')->name('home')->multiformat();
 
     Route::post('/tweets', 'TweetController@store');
+
+    Route::get('/tweets/{tweet}/like', 'TweetLikesController@isliked');
+
+    Route::get('/tweets/{tweet}/dislike', 'TweetLikesController@isdislike');
+
+    Route::post('/tweets/{tweet}/like', 'TweetLikesController@store');
+
+    Route::Delete('/tweets/{tweet}/like', 'TweetLikesController@destroy');
 
     Route::post('/profiles/{user:username}/follow', 'FollowController@store')->name('follow');
 

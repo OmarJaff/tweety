@@ -4,7 +4,6 @@
             <h1>
                 <img src="/images/logo.svg" alt="Tweety logo">
             </h1>
-{{--            <a href="{{route('logout')}}" class="text-gray-600">Log out</a>--}}
                 <form id="frm-logout" action="{{ route('logout') }}" method="POST"  >
                     @csrf
                     <button class="text-gray-600 outline-none focus:outline-none" type="submit">Log Out</button>

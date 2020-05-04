@@ -3,19 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Tweet;
+
+use App\User;
 use Illuminate\Http\Request;
+
 
 class TweetController extends Controller
 {
 
     public function index()
     {
-        return view('tweets.index', [
-            'tweets' => auth()->user()->timeline()
+        return \request()->match([
+            'html' => function () {
+                return view('tweets.index', ['tweets' => current_user()->timeline()]);
+            },
+            'json' => response()->json(['tweets' => current_user()->timeline()])
         ]);
     }
 
-    public function  store()
+    public function store()
     {
         $attributes = \request()->validate([
             'body' => 'required|max:255'

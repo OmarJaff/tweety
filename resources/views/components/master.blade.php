@@ -10,18 +10,20 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" data-turbolinks-track="false" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" data-turbolinks-track="true">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" data-turbolinks-track="true">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" data-turbolinks-track="true">
+ </head>
 <body>
 <div id="app">
-   {{$slot}}
+
+    {{$slot}}
+
 </div>
-</body>
+ </body>
 </html>

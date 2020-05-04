@@ -2,8 +2,10 @@
 
 <div>
     @include('publish-tweet-panel')
+{{--    @include('timeline')--}}
 
-    @include('timeline')
+    <timeline :current-user="{{current_user()}}" ></timeline>
+
 </div>
 
 </x-app>

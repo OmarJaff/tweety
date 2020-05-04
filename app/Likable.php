@@ -8,6 +8,7 @@ namespace App;
 
 //use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Builder;
+
 trait Likable
 {
 
@@ -18,6 +19,8 @@ trait Likable
             ,'likes', 'likes.tweet_id', 'tweets.id'
             );
     }
+
+
 
     public function like($user = null, $liked = true)
     {

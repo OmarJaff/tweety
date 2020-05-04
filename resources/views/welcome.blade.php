@@ -1,7 +1,7 @@
 
     <x-master>
-        <div class="flex  p-8 bg-gray-100 h-screen w-screen antialiased relative overflow-hidden">
-            <div class="flex flex-col lg:flex-row bg-white justify-center rounded shadow-sm p-4 w-full items-center">
+        <div class="flex flex-col  p-8 bg-gray-100 h-screen w-screen antialiased relative overflow-hidden">
+            <div class="flex flex-col h-full lg:flex-row bg-white justify-center rounded shadow-sm p-4 w-full items-center">
 
                 <div class="flex flex-col h-auto">
                     <img src="/images/logo.svg" class="w-64 p-2"   alt="Tweety logo">
@@ -13,7 +13,7 @@
                         <a href="{{ route('login') }}" class="text-gray-600 text-lg lg:text-2xl">Login</a>
 
 
-                        <a href="{{ route('register') }}" class="text-gray-600  text-lg lg:text-2xl ">Rigister</a>
+                        <a href="{{ route('register') }}" class="text-gray-600  text-lg lg:text-2xl ">Register</a>
                     @endauth
                 </div>
 
@@ -113,6 +113,7 @@
                     </svg>
                 </div>
             </div>
+            <div class="flex justify-center"><span class="text-xs text-gray-600  p-4" style="right:10%">Developed and designed by <a href="https://www.omarjaff.com" >omar jaff</a></span></div>
             </div>
 
     </x-master>
