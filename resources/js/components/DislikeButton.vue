@@ -34,11 +34,11 @@
         created() {
             this.isDislikedBy()
         },
-        watch: {
-            dislikesNumber: function() {
-                this.isDislikedBy();
-            }
-        },
+        // watch: {
+        //     dislikesNumber: function() {
+        //         this.isDislikedBy();
+        //     }
+        // },
 
         methods:
             {
@@ -52,9 +52,9 @@
                 },
                 isDislikedBy()
                 {
-                    axios.get(`/tweets/${this.tweetID}/dislike`).then((response) => {
-                        this.disliked = response.data ? true : false;
-                    } )
+                    // axios.get(`/tweets/${this.tweetID}/dislike`).then((response) => {
+                    //     this.disliked = response.data ? true : false;
+                    // } )
                 }
             }
 

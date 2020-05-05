@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/tweets', 'TweetController@store');
 
-    Route::get('/tweets/{tweet}/like', 'TweetLikesController@isliked');
+    Route::get('/tweets/{tweet}/like', 'TweetLikesController@isLikedBy');
 
     Route::get('/tweets/{tweet}/dislike', 'TweetLikesController@isdislike');
 

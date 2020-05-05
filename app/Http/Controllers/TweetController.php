@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 
 class TweetController extends Controller
 {
-
     public function index()
     {
+
         return \request()->match([
             'html' => function () {
                 return view('tweets.index', ['tweets' => current_user()->timeline()]);

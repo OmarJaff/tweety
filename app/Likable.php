@@ -34,9 +34,14 @@ trait Likable
         );
     }
 
+    public function unlinke($user) {
+
+        $this->likes()->where('user_id',$user->id)->delete();
+    }
+
     public function dislike($user = null)
     {
-        return $this->like($user ,false);
+         $this->like($user ,false);
     }
 
     public  function isLikedBy(User $user)

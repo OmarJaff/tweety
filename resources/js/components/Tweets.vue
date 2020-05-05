@@ -18,7 +18,11 @@
 
                 <div class="flex space-x-3">
 
-                    <like-buttons :likesNumber="tweet.likes"  @getTweets="getTweets()" @like="like" :tweetID="tweet.id">
+                    <like-buttons :likesNumber="tweet.likes"
+                                  @getTweets="getTweets()"
+                                  @like="like"
+                                  :tweetID="tweet.id"
+                     >
 
                     </like-buttons>
 

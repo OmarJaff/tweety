@@ -29,7 +29,8 @@
         name: 'like-buttons',
         props: {
             tweetID: {required: true},
-            likesNumber: {required: true}
+            userID: {required:true},
+             likesNumber: {required: true}
         },
         data: () => ({
             isLikedBy: ''
@@ -37,11 +38,11 @@
         created() {
           this.isLikedByUser();
         },
-        watch: {
-            likesNumber: function() {
-                this.isLikedByUser();
-            }
-        },
+        // watch: {
+        //     likesNumber: function() {
+        //         this.isLikedByUser();
+        //     }
+        // },
         methods:
             {
 
@@ -50,9 +51,9 @@
                 },
                 isLikedByUser()
                 {
-                    axios.get(`/tweets/${this.tweetID}/like`).then((response) => {
-                        this.isLikedBy = response.data ? true : false;
-                    } ).catch(error=>console.log(error))
+                    // axios.get(`/tweets/${this.userID}/like`).then((response) => {
+                    //     this.isLikedBy = response.data ? true : false;
+                    // } ).catch(error=>console.log(error))
                 }
             }
 

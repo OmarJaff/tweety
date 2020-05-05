@@ -19,15 +19,7 @@ class TweetLikesController extends Controller
         //
     }
 
-    public function isliked(Tweet $tweet)
-    {
-        return $tweet->isLikedBy(current_user());
-    }
 
-    public function isdislike(Tweet $tweet)
-    {
-        return $tweet->isDislikedBy(current_user());
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -46,7 +38,7 @@ class TweetLikesController extends Controller
      */
     public function store(Tweet $tweet)
     {
-        $tweet->like(current_user());
+        $tweet->isLikedBy(current_user()) ? $tweet->unlinke(current_user()) : $tweet->like(current_user());
     }
 
     /**
@@ -87,6 +79,6 @@ class TweetLikesController extends Controller
      */
     public function destroy(Tweet $tweet)
     {
-        $tweet->dislike(current_user());
+        $tweet->isDislikedBy(current_user()) ? $tweet->unlinke(current_user()) :  $tweet->dislike(current_user());
     }
 }

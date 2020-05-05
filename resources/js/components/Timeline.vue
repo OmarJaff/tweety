@@ -50,8 +50,7 @@
              },
 
              like(tweetID) {
-                 const vm = this;
-                 axios.post(`/tweets/${tweetID}/like`).then(
+                  axios.post(`/tweets/${tweetID}/like`).then(
                      () => {
                          this.getTweets()
                       }
