@@ -15,7 +15,7 @@
                     </g>
                 </svg>
             </button>
-            {{dislikesNumber}}
+            {{dislikesNumber ? dislikesNumber : 0}}
         </div>
     </form>
 </template>

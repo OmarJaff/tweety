@@ -6,13 +6,33 @@
 
 require('./bootstrap');
 
+
+import Vue from 'vue';
+import Vuetify from 'vuetify';
+
+Vue.use(Vuetify);
+
 window.TurbolinksAdapter = require('vue-turbolinks');
+
+
 const Turbolinks = require("turbolinks");
+
+
+
+window.dayjs = require('dayjs');
+window.relativeTime = require('dayjs/plugin/relativeTime')
+
+
+dayjs.extend(relativeTime);
+
 Turbolinks.start();
 
 
 
+
 window.Vue = require('vue');
+// window.Vue = require('dayjs');
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -25,10 +45,14 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('like-buttons', require('./components/LikeButtons.vue').default);
-Vue.component('dislike-buttons', require('./components/DislikeButton.vue').default);
-Vue.component('timeline', require('./components/Timeline.vue').default);
-Vue.component('tweets', require('./components/Tweets.vue').default);
+Vue.component('like-buttons', require('./components/timeline/LikeButtons.vue').default);
+Vue.component('dislike-buttons', require('./components/timeline/DislikeButton.vue').default);
+Vue.component('timeline', require('./components/timeline/Timeline.vue').default);
+Vue.component('tweets', require('./components/timeline/Tweets.vue').default);
+Vue.component('profile', require('./components/profile/Profile').default);
+Vue.component('follow-button', require('./components/profile/FollowButton').default);
+Vue.component('follow-alert', require('./components/profile/FollowAlert').default);
+Vue.component('unfollow-alert', require('./components/profile/UnfollowAlert').default);
 
 
 
@@ -37,9 +61,11 @@ Vue.component('tweets', require('./components/Tweets.vue').default);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+const vuetifyOptions={};
 
 document.addEventListener('turbolinks:load', () => {
 const app = new Vue({
     el: '#app',
+    vuetify: new Vuetify(vuetifyOptions),
 });
 });

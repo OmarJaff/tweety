@@ -27,13 +27,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/tweets/{tweet}/like', 'TweetLikesController@isLikedBy');
 
-    Route::get('/tweets/{tweet}/dislike', 'TweetLikesController@isdislike');
-
     Route::post('/tweets/{tweet}/like', 'TweetLikesController@store');
 
     Route::Delete('/tweets/{tweet}/like', 'TweetLikesController@destroy');
 
     Route::post('/profiles/{user:username}/follow', 'FollowController@store')->name('follow');
+
+    Route::get('/profiles/{user:username}/follow', 'FollowController@isFollowing');
 
     Route::get('/profiles/{user:username}', 'ProfileController@show')->name('profile');
 

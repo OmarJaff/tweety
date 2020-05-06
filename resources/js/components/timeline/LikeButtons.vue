@@ -18,7 +18,7 @@
                         </g>
                     </svg>
                 </button>
-                <span>{{likesNumber}}</span>
+                <span>{{likesNumber ? likesNumber : 0}}</span>
             </div>
         </div>
     </form>
@@ -29,7 +29,6 @@
         name: 'like-buttons',
         props: {
             tweetID: {required: true},
-            userID: {required:true},
              likesNumber: {required: true}
         },
         data: () => ({

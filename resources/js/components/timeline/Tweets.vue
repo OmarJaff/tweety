@@ -40,7 +40,6 @@
         name: 'tweets',
         props: {
             'tweets': {type: Array, required: true},
-            'currentUser': {type: Object, required: true}
         },
 
         methods: {

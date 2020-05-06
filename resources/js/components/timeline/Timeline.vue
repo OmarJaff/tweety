@@ -4,7 +4,6 @@
             <tweets @getTweets="getTweets()"
                     @like="like"
                     @dislike="dislike"
-                    :currentUser="currentUser"
                     :tweets="tweets.data"
 
             ></tweets>
@@ -16,6 +15,8 @@
     </div>
 </template>
 
+
+
 <script>
     export default {
         name: 'timeline',
@@ -26,7 +27,7 @@
             disliked: ''
         }),
         props: {
-            currentUser: {required:true}
+            user: {default: ()=>{}}
         },
          created() {
             this.getTweets()
@@ -36,7 +37,12 @@
         },
          methods: {
             getTweets() {
-                    axios.get('/tweets').then((response) => {
+                        if(this.user) {
+                          return axios.get(`/profiles/${this.user.username}`).then((response) => {
+                              this.tweets = response.data.tweets
+                          }).catch(error=>console.log(error))
+                        }
+                  return   axios.get('/tweets').then((response) => {
                        this.tweets = response.data.tweets;
                     }).catch(error=>console.log(error))
              },

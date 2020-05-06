@@ -11,9 +11,14 @@ class ProfileController extends Controller
 {
     public  function show(User $user)
     {
-        return view('profiles.show', [
-            'user'=>$user,
-            'tweets'=>$user->tweets()->withLikes()->paginate(50)
+
+        return \request()->match([
+            'html' => function() use($user) {
+                return view('profiles.show', ['user' => $user,'tweets'=>$user->tweets()->withLikes()->paginate(50)]);
+            },
+            'json' =>function() use($user) {
+                return response()->json(['tweets' =>$user->tweets()->withLikes()->with(['user'])->paginate(50)]);
+            }
         ]);
     }
 
