@@ -11,6 +11,7 @@ class FollowController extends Controller
     public function store(User $user)
     {
         current_user()->toggleFollow($user);
+
     }
 
 

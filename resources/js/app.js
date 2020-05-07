@@ -8,9 +8,9 @@ require('./bootstrap');
 
 
 import Vue from 'vue';
-import Vuetify from 'vuetify';
 
-Vue.use(Vuetify);
+
+
 
 window.TurbolinksAdapter = require('vue-turbolinks');
 
@@ -53,6 +53,7 @@ Vue.component('profile', require('./components/profile/Profile').default);
 Vue.component('follow-button', require('./components/profile/FollowButton').default);
 Vue.component('follow-alert', require('./components/profile/FollowAlert').default);
 Vue.component('unfollow-alert', require('./components/profile/UnfollowAlert').default);
+Vue.component('friends-list', require('./components/friends-list/FriendList').default);
 
 
 
@@ -66,6 +67,5 @@ const vuetifyOptions={};
 document.addEventListener('turbolinks:load', () => {
 const app = new Vue({
     el: '#app',
-    vuetify: new Vuetify(vuetifyOptions),
 });
 });

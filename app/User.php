@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Policies\userPolicy;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Gate;
 
 class User extends Authenticatable
 {
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username','avatar','name', 'email', 'password',
+        'username','avatar','name', 'email', 'password','bio',
     ];
 
     /**
@@ -74,8 +76,11 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
-//    public function getRouteKeyName()
-//    {
-//        return 'name';
-//    }
+    public function canEdit($user) {
+        $response = Gate::allows('edit', $user);
+        if($response) {
+            return true;
+        }
+        return false;
+    }
 }

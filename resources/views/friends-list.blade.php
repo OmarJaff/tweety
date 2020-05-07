@@ -13,5 +13,6 @@
         @empty
             <li class="mb-4">No friends Yet!</li>
         @endforelse
+{{--    <friends-list ></friends-list>--}}
     </ul>
 </div>

@@ -35,13 +35,21 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profiles/{user:username}/follow', 'FollowController@isFollowing');
 
+    Route::get('/profiles/{user:username}/bio', 'ProfileController@bio');
+
     Route::get('/profiles/{user:username}', 'ProfileController@show')->name('profile');
 
     Route::get('/profiles/{user:username}/edit', 'ProfileController@edit')->name('edit-profile');
 
+    Route::post('/profiles/{user:username}/edit', 'ProfileController@updateUserBio')->name('edit-profile');
+
+    Route::delete('/profiles/{user:username}/delete', 'ProfileController@removeBio')->name('edit-profile');
+
     Route::patch('/profiles/{user:username}', 'ProfileController@update')->middleware('can:edit,user');
 
     Route::get('/explore', 'ExploreController@index');
+
+    Route::get('/friends', 'FriendsController@show');
 });
 
 

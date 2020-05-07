@@ -23,4 +23,8 @@ class userPolicy
     {
         return $currentUser->is($user);
     }
+
+    public function delete(User $currentUser, User $user) {
+        return $currentUser->is($user);
+    }
 }
