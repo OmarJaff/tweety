@@ -16,8 +16,7 @@ class TweetLikesController extends Controller
      */
     public function index()
     {
-        //
-    }
+     }
 
 
     /**

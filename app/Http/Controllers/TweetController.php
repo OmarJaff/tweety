@@ -6,6 +6,7 @@ use App\Tweet;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 
 class TweetController extends Controller
@@ -20,6 +21,7 @@ class TweetController extends Controller
             'json' => response()->json(['tweets' => current_user()->timeline()])
         ]);
     }
+
 
     public function store()
     {

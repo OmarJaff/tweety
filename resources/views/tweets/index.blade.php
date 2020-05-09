@@ -2,9 +2,12 @@
 
 <div>
     @include('publish-tweet-panel')
-{{--    @include('timeline')--}}
 
-    <timeline  ></timeline>
+    <timeline :current-user="{{current_user()->id}}"
+              :user-likes="{{current_user()->likes}}">
+
+
+    </timeline>
 
 </div>
 

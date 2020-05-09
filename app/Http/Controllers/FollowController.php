@@ -11,7 +11,10 @@ class FollowController extends Controller
     public function store(User $user)
     {
         current_user()->toggleFollow($user);
+        $message = current_user()->following($user->id) ? 'You followed '.$user->name : 'You unfollowed '.$user->name;
+        Session::flash('follow', $message);
 
+        return redirect()->back();
     }
 
 

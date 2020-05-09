@@ -29,11 +29,6 @@
 
                     <slot></slot>
 
-
-                    <div :class="this.isCurrentUser ? 'hidden' : ''">
-                        <follow-button :name="user.name" :userName="user.username"></follow-button>
-                    </div>
-
                 </div>
             </div>
             <div v-if="editable" class="flex flex-col items-center">
@@ -124,7 +119,7 @@
             userInfo: '',
             title: 'this is title',
             bio: '',
-            totalCharacter: 0,
+             totalCharacter: 0,
             bioFieldShowed: false
 
         }),
@@ -145,7 +140,7 @@
             getUserBio() {
                 axios.get(`/profiles/${this.user.username}/bio`).then((response) => {
                     this.clearifyBio(response.data)
-                }).catch(error => console.log(error))
+                 }).catch(error => console.log(error))
             },
 
             charCount() {
@@ -167,8 +162,8 @@
             clearifyBio(userBio) {
                 if (userBio.length) {
                     return this.bio = userBio
-                }
-                return this.bio = ""
+                 }
+                 return this.bio = ""
             },
 
             handleRemoveBio() {
@@ -180,10 +175,7 @@
             cancleBio() {
 
                 this.bioFieldShowed = false;
-                this.bio = ""
-
-
-            }
+             }
         }
     }
 </script>

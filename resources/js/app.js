@@ -10,13 +10,10 @@ require('./bootstrap');
 import Vue from 'vue';
 
 
-
-
 window.TurbolinksAdapter = require('vue-turbolinks');
 
 
 const Turbolinks = require("turbolinks");
-
 
 
 window.dayjs = require('dayjs');
@@ -26,8 +23,6 @@ window.relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.extend(relativeTime);
 
 Turbolinks.start();
-
-
 
 
 window.Vue = require('vue');
@@ -45,16 +40,15 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('like-buttons', require('./components/timeline/LikeButtons.vue').default);
-Vue.component('dislike-buttons', require('./components/timeline/DislikeButton.vue').default);
+Vue.component('like-button', require('./components/timeline/LikeButton.vue').default);
 Vue.component('timeline', require('./components/timeline/Timeline.vue').default);
 Vue.component('tweets', require('./components/timeline/Tweets.vue').default);
 Vue.component('profile', require('./components/profile/Profile').default);
-Vue.component('follow-button', require('./components/profile/FollowButton').default);
 Vue.component('follow-alert', require('./components/profile/FollowAlert').default);
-Vue.component('unfollow-alert', require('./components/profile/UnfollowAlert').default);
 Vue.component('friends-list', require('./components/friends-list/FriendList').default);
-
+Vue.component('replay', require('./components/timeline/Replay').default);
+Vue.component('edit-modal', require('./components/timeline/editModal').default);
+Vue.component('tweet-editor-model', require('./components/timeline/TweetEditorModel').default);
 
 
 /**
@@ -62,10 +56,10 @@ Vue.component('friends-list', require('./components/friends-list/FriendList').de
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-const vuetifyOptions={};
+const vuetifyOptions = {};
 
 document.addEventListener('turbolinks:load', () => {
-const app = new Vue({
-    el: '#app',
-});
+    const app = new Vue({
+        el: '#app',
+    });
 });

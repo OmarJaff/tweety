@@ -1,12 +1,12 @@
 <template>
-    <div class="border border-gray-300 rounded-lg">
+    <div class="">
         <div v-cloak v-if="tweets.data">
             <tweets @getTweets="getTweets()"
                     @like="like"
                     @dislike="dislike"
                     :tweets="tweets.data"
-
-            ></tweets>
+                    :userId="currentUser">
+             </tweets>
         </div>
 
         <p v-else class="p-4">No tweets yet!</p>
@@ -23,13 +23,17 @@
         data: () => ({
             tweets: {},
             liked: '',
-            disliked: ''
+            disliked: '',
         }),
         props: {
-            user: {
+            currentUser: {
                 default: () => {
                 }
-            }
+            },
+            userLikes: {
+                required:true
+            },
+            user: {default: () => {}}
         },
         created() {
             this.getTweets()
