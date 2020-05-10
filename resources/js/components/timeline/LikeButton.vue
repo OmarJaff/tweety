@@ -83,9 +83,11 @@
                 },
 
                 isLikedByUser() {
-                    this.userLikes.forEach((user) => {
-                        if (user.user_id === this.userId) {
-                            this.userLiked = user.liked === 1;
+                    this.userLikes.forEach((likes) => {
+                        if (likes.user_id === this.userId) {
+                            this.userLiked = likes.liked === 1;
+                        } else {
+                            this.userLiked=null
                         }
                     })
                  }

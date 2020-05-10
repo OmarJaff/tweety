@@ -5,7 +5,7 @@
                 bg-gray-100 absolute transition -translate-x-32
                 my-3 w-24 h-20 rounded-lg flex flex-col px-2 justify-center space-y-2  mx-1">
 
-            <button class="flex items-center space-x-1 btn-link focus:outline-none">
+            <button @click="updateTweet(tweetId)" class="flex items-center space-x-1 btn-link focus:outline-none">
                 <svg class="text-gray-500 w-4 hover:text-blue-500" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
                      xmlns="http://www.w3.org/2000/svg">
 
@@ -19,7 +19,7 @@
                 <p class="text-gray-700 text-sm hover:text-blue-700">Edit</p>
             </button>
 
-            <button class="flex items-center space-x-1 btn-link focus:outline-none hover:text-blue-500">
+            <button @click="deleteTweet(tweetId)" class="flex items-center space-x-1 btn-link focus:outline-none hover:text-blue-500">
                 <svg class="text-gray-500 w-4 " width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
                      xmlns="http://www.w3.org/2000/svg">
 
@@ -34,3 +34,24 @@
     </div>
 
 </template>
+
+<script>
+    export default {
+        props: {
+            tweetId: {required:true}
+        },
+
+        methods: {
+            deleteTweet(id) {
+
+                this.$emit('deleteTweet', id)
+            },
+            updateTweet(id) {
+                this.$emit('updateTweet', id)
+            }
+        }
+
+    }
+</script>
+
+

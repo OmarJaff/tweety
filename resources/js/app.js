@@ -49,6 +49,7 @@ Vue.component('friends-list', require('./components/friends-list/FriendList').de
 Vue.component('replay', require('./components/timeline/Replay').default);
 Vue.component('edit-modal', require('./components/timeline/editModal').default);
 Vue.component('tweet-editor-model', require('./components/timeline/TweetEditorModel').default);
+Vue.component('modal', require('./components/timeline/Modal').default);
 
 
 /**

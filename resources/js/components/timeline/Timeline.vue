@@ -6,7 +6,7 @@
                     @dislike="dislike"
                     :tweets="tweets.data"
                     :userId="currentUser">
-             </tweets>
+            </tweets>
         </div>
 
         <p v-else class="p-4">No tweets yet!</p>
@@ -31,9 +31,12 @@
                 }
             },
             userLikes: {
-                required:true
+                required: true
             },
-            user: {default: () => {}}
+            user: {
+                default: () => {
+                }
+            }
         },
         created() {
             this.getTweets()

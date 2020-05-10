@@ -61,7 +61,7 @@
                                               id="bio"
                                               class="w-full border-gray-300 border-b-2 w-full focus:outline-none outline-none focus:border-blue-400"
                                               maxlength="200">
-                                  </textarea>
+                                   </textarea>
 
                         <button
                             class="
@@ -119,7 +119,7 @@
             userInfo: '',
             title: 'this is title',
             bio: '',
-             totalCharacter: 0,
+            totalCharacter: 0,
             bioFieldShowed: false
 
         }),
@@ -138,9 +138,9 @@
 
         methods: {
             getUserBio() {
-                axios.get(`/profiles/${this.user.username}/bio`).then((response) => {
+                axios.get(`/bio/${this.user.username}`).then((response) => {
                     this.clearifyBio(response.data)
-                 }).catch(error => console.log(error))
+                }).catch(error => console.log(error))
             },
 
             charCount() {
@@ -152,28 +152,26 @@
             },
 
             handleBioSubmite() {
-                axios.post(`/profiles/${this.user.username}/edit`, {bio: this.bio}).then((response) => {
-                    this.bio = response.data,
-                        this.getUserBio()
-                    this.bioFieldShowed = false
+                axios.patch(`/bio/${this.user.username}/edit`, {bio: this.bio}).then((response) => {
+                    this.getUserBio(),
+                        this.bioFieldShowed = false
                 }).catch(error => console.log(error))
             },
 
             clearifyBio(userBio) {
                 if (userBio.length) {
-                    return this.bio = userBio
-                 }
-                 return this.bio = ""
+                   return  this.bio = userBio;
+                }
+                return this.bio = ""
             },
 
             handleRemoveBio() {
-                axios.delete(`/profiles/${this.user.username}/delete`).then(() => {
+                axios.delete(`/bio/${this.user.username}/delete`).then(() => {
                     this.getUserBio();
                 }).catch(error => console.log(error))
             },
 
             cancleBio() {
-
                 this.bioFieldShowed = false;
              }
         }

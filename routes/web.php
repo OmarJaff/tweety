@@ -21,29 +21,34 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
-    Route::get('/tweets', 'TweetController@index')->name('home')->multiformat();
+    Route::get('/tweets', 'TweetController@index')->name('home');
+
 
     Route::post('/tweets', 'TweetController@store');
 
     Route::get('/tweets/{tweet}/like', 'TweetLikesController@isLikedBy');
 
+    Route::patch('/tweets/{tweet}/update', 'TweetController@update');
+
+    Route::delete('/tweets/{tweet}/delete', 'TweetController@destory');
+
     Route::post('/tweets/{tweet}/like', 'TweetLikesController@store');
 
-    Route::Delete('/tweets/{tweet}/like', 'TweetLikesController@destroy');
+    Route::delete('/tweets/{tweet}/like', 'TweetLikesController@destroy');
 
     Route::post('/profiles/{user:username}/follow', 'FollowController@store')->name('follow');
 
     Route::get('/profiles/{user:username}/follow', 'FollowController@isFollowing');
 
-    Route::get('/profiles/{user:username}/bio', 'ProfileController@bio');
-
     Route::get('/profiles/{user:username}', 'ProfileController@show')->name('profile');
 
     Route::get('/profiles/{user:username}/edit', 'ProfileController@edit')->name('edit-profile');
 
-    Route::post('/profiles/{user:username}/edit', 'ProfileController@updateUserBio')->name('edit-profile');
+    Route::get('/bio/{user:username}', 'BioController@show');
 
-    Route::delete('/profiles/{user:username}/delete', 'ProfileController@removeBio')->name('edit-profile');
+    Route::patch('/bio/{user:username}/edit', 'BioController@update')->middleware('can:edit,user');
+
+    Route::delete('/bio/{user:username}/delete', 'BioController@destroy')->middleware('can:delete,user');
 
     Route::patch('/profiles/{user:username}', 'ProfileController@update')->middleware('can:edit,user');
 

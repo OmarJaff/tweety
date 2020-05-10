@@ -17,7 +17,7 @@ class ProfileController extends Controller
                 return view('profiles.show', ['user' => $user, 'tweets' => $user->tweets()->withLikes()->paginate(50)]);
             },
             'json' => function () use ($user) {
-                return response()->json(['tweets' => $user->tweets()->withLikes()->with(['user'])->with(['likes'])->paginate(50)]);
+                return response()->json(['tweets' => $user->tweets()->withLikes()->with(['user:id,username,avatar,name'])->with(['likes:id,user_id,tweet_id,liked'])->paginate(50)]);
             }
         ]);
     }
@@ -49,29 +49,4 @@ class ProfileController extends Controller
         return redirect($user->path());
     }
 
-
-    public
-    function updateUserBio(User $user)
-    {
-        $this->authorize('edit', $user);
-
-        $attribute = \request()->validate([
-            'bio' => ['required', 'string', 'max:210'],
-        ]);
-
-        $user->where('username', current_user()->username)->update($attribute);
-
-    }
-
-    public function removeBio(User $user)
-    {
-        $this->authorize('delete' , $user);
-
-        $user->where('bio', current_user()->bio)->update(['bio' => null]);
-
-    }
-
-    public function bio(User $user) {
-        return response()->json($user->bio);
-    }
 }

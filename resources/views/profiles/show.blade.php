@@ -13,9 +13,8 @@
                 <form action="{{route('follow', $user)}}" method="POST"  >
                     @csrf
                     <button type="submit"
-
                             class="hover:bg-blue-600 focus:outline-none outline-none bg-blue-500 shadow px-4 py-2 rounded-full text-white text-xs">
-                        {{current_user()->following($user->id) ? 'Unfollow' : 'follow'}}
+                        {{current_user()->following($user) ? 'unfollow' : 'follow me' }}
                     </button>
                 </form>
             @endif

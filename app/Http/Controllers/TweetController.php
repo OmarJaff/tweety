@@ -7,6 +7,8 @@ use App\Tweet;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use App\Policies\TweetPolicy;
+use Illuminate\Support\Facades\Session;
 
 
 class TweetController extends Controller
@@ -34,5 +36,23 @@ class TweetController extends Controller
         ]);
 
         return redirect('/tweets');
+    }
+
+    public function update(Tweet $tweet)
+    {
+        if (current_user()->can('update', $tweet)) {
+            $attribute = \request()->validate([
+                'body' => ['required', 'string']
+            ]);
+
+            $tweet->update($attribute);
+        }
+    }
+
+    public function destory(Tweet $tweet)
+    {
+        if (current_user()->can('delete', $tweet)) {
+            $tweet->where('id', $tweet->id)->delete();
+        }
     }
 }

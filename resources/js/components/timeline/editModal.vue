@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="showModel = true" class="absolute flex inset-0 left-auto h-0 focus:outline-none my-3 mx-2">
+        <button @click="openModel = true" class="absolute flex inset-0 left-auto h-0 focus:outline-none my-3 mx-2">
             <svg class="text-gray-600 w-6 hover:text-blue-600" width="24" height="24" viewBox="0 0 24 24" fill="none"
                  xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -8,13 +8,13 @@
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </button>
-            <div v-if="showModel">
+            <div v-if="openModel === true">
                 <button
-                    @click="showModel = false"
+                    @click="openModel = false"
                     class="fixed w-full h-full inset-0 opacity-0 cursor-default
                     focus:outline-none z-50 bg-red-200">
                 </button>
-                <tweet-editor-model>
+                <tweet-editor-model @deleteTweet="deleteTweet" @updateTweet="updateTweet" :tweetId="tweetId">
 
                 </tweet-editor-model>
             </div>
@@ -26,17 +26,24 @@
 <script>
 
     export default {
+        name: 'edit-modal',
         props: {
-
+            tweetId: {required:true},
+            tweetBody: {type:String, required: true}
         },
         data: () => ({
-            showModel: false,
-        }),
-        methods: {
-          openTweetEditorModel()
-          {
+            openModel: false
+         }),
 
-          }
+
+        methods: {
+            deleteTweet(id) {
+                this.$emit('deleteTweet' , id)
+            },
+            updateTweet(id) {
+                this.openModel=false
+              this.$emit('updateTweet', id, this.tweetBody)
+            }
         }
     }
 
