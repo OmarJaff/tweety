@@ -52,7 +52,7 @@
                     </button>
                 </div>
                 <div v-if="bioFieldShowed"
-                     class="flex w-full items-center transition translate-y-3 p-2 m-4 w-full justify-center">
+                     class="flex w-full items-center transition translate-y-3 p-2 mb-4 w-full justify-center">
                     <form @submit.prevent="handleBioSubmite()"
                           class="flex w-full items-center transition translate-y-3 p-2 m-4 w-full justify-center">
                                     <textarea @keyup='charCount()' v-model="bio" type="textarea"
@@ -66,8 +66,8 @@
                         <button
                             class="
                                   absolute
-                                  right-0 text-sm text-gray-400 mx-8 focus:outline-none transition -translate-y-4"
-                            :class="totalCharacter > 0 ? 'text-gray-700  rounded-full px-2 py-1 shadow hover:bg-gray-100' : ''"
+                                  right-0 text-sm  mx-8 focus:outline-none transition -translate-y-4"
+                            :class="totalCharacter > 0 ? 'text-white font-medium bg-blue-400  rounded-full px-2 py-1 shadow hover:bg-gray-100 hover:text-blue-500'  : 'text-gray-400'"
                             :disabled="totalCharacter > 0 ? false : true" type="submit"
                         >Save Bio
                         </button>
@@ -75,7 +75,7 @@
                             class="
                                   absolute
                                   right-0 text-sm  mx-24 focus:outline-none transition -translate-y-4
-                                  text-gray-700 px-3 py-1 btn-link "
+                                  text-gray-700 px-3 py-1 btn-link px-6 "
 
                             @click="cancleBio()"
                         >Cancle
@@ -173,6 +173,7 @@
 
             cancleBio() {
                 this.bioFieldShowed = false;
+                this.getUserBio()
              }
         }
     }

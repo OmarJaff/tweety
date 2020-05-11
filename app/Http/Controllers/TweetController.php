@@ -20,7 +20,9 @@ class TweetController extends Controller
             'html' => function () {
                 return view('tweets.index', ['tweets' => current_user()->timeline()]);
             },
-            'json' => response()->json(['tweets' => current_user()->timeline()])
+            'json' => function() {
+                return   response()->json(['tweets' => current_user()->timeline()]);
+            }
         ]);
     }
 

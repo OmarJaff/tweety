@@ -17,7 +17,7 @@ class ProfileController extends Controller
                 return view('profiles.show', ['user' => $user, 'tweets' => $user->tweets()->withLikes()->paginate(50)]);
             },
             'json' => function () use ($user) {
-                return response()->json(['tweets' => $user->tweets()->withLikes()->with(['user:id,username,avatar,name'])->with(['likes:id,user_id,tweet_id,liked'])->paginate(50)]);
+                return response()->json(['tweets' => $user->tweets()->withLikes()->with(['user:id,username,avatar,name'])->with(['likes:id,user_id,tweet_id,liked'])->with(['replies'])->paginate(50)]);
             }
         ]);
     }

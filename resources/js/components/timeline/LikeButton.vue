@@ -57,8 +57,8 @@
             userLikes: {required: true}
         },
         data: () => ({
-             userLiked: null,
-          }),
+            userLiked: null,
+        }),
         created() {
             this.isLikedByUser()
         },
@@ -77,8 +77,8 @@
                 like(tweetID) {
                     this.$emit('like', tweetID)
                 },
-                dislike(tweetID) {
 
+                dislike(tweetID) {
                     this.$emit('dislike', tweetID)
                 },
 
@@ -87,10 +87,10 @@
                         if (likes.user_id === this.userId) {
                             this.userLiked = likes.liked === 1;
                         } else {
-                            this.userLiked=null
+                            this.userLiked = null
                         }
                     })
-                 }
+                }
 
             }
 

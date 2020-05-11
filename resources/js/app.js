@@ -24,6 +24,10 @@ dayjs.extend(relativeTime);
 
 Turbolinks.start();
 
+const bodyScrollLock = require('body-scroll-lock');
+window.disableBodyScroll = bodyScrollLock.disableBodyScroll;
+window.enableBodyScroll = bodyScrollLock.enableBodyScroll;
+window.targetElement = document.querySelector('#submitmodal');
 
 window.Vue = require('vue');
 // window.Vue = require('dayjs');
@@ -50,6 +54,7 @@ Vue.component('replay', require('./components/timeline/Replay').default);
 Vue.component('edit-modal', require('./components/timeline/editModal').default);
 Vue.component('tweet-editor-model', require('./components/timeline/TweetEditorModel').default);
 Vue.component('modal', require('./components/timeline/Modal').default);
+Vue.component('tweet-with-replies', require('./components/timeline/TweetWithReplies').default);
 
 
 /**

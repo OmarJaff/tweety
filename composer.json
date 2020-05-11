@@ -17,7 +17,8 @@
         "laravel/ui": "^2.0",
         "livewire/livewire": "^1.0",
         "m1guelpf/laravel-multiformat": "^1.0",
-        "ext-mysql_xdevapi": "*"
+        "ext-mysql_xdevapi": "*",
+        "ext-json": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.7",

@@ -21,6 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/tweets', 'TweetController@index')->name('home');
 
 
@@ -52,9 +53,17 @@ Route::middleware('auth')->group(function () {
 
     Route::patch('/profiles/{user:username}', 'ProfileController@update')->middleware('can:edit,user');
 
+
+    Route::delete('/replies/{reply}', 'ReplyController@destroy');
+
+    Route::post('/replies/{tweet}', 'ReplyController@store');
+
     Route::get('/explore', 'ExploreController@index');
 
     Route::get('/friends', 'FriendsController@show');
+
+    Route::get('/tweets/{tweet}', 'ReplyController@show');
+
 });
 
 

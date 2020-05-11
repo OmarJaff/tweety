@@ -29,7 +29,7 @@
         name: 'edit-modal',
         props: {
             tweetId: {required:true},
-            tweetBody: {type:String, required: true}
+            tweetBody: {  required: true}
         },
         data: () => ({
             openModel: false
