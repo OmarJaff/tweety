@@ -11,7 +11,6 @@
                  alt="your avatar"
                  class="rounded-full mr-2 w-10 h-10">
             <publish-button></publish-button>
-
         </footer>
         @error('body')
         <h1 class="text-red-500 mt-2 font-semibold text-sm">{{$message}}</h1>

@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <div v-cloak v-if="tweets.data.length">
+        <div v-cloak v-if="tweets.data && tweets.data.length">
             <tweets @getTweets="getTweets()"
                     @like="like"
                     @dislike="dislike"
@@ -10,7 +10,8 @@
         </div>
 
         <div v-else-if="user" class="container">
-            <h1 class="text-gray-600 text-lg sm:text-3xl text-center">No tweets yet, Write Your first <a href="/tweets" class="text-blue-500">tweet!</a></h1>
+            <h1   class="text-gray-600 text-lg sm:text-3xl text-center">
+                No tweets yet</h1>
             <div class="w-60 w-60 m-4">
                 <svg   viewBox="0 0 571 481" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M552 0H19C8.50659 0 0 8.50658 0 19V462C0 472.493 8.50659 481 19 481H552C562.493 481 571 472.493 571 462V19C571 8.50659 562.493 0 552 0Z" fill="#EDF2F7"/>
