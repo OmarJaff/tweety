@@ -2042,6 +2042,11 @@ cosmiconfig@^5.0.0:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
+countable@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/countable/-/countable-3.0.1.tgz#1d0c1c426e8db08890534151ac7448c3642496ce"
+  integrity sha512-dz/sdi+RFpHJKMen5RAB9EKpCKd/q5WMfxG3SbdbQ3Pak4+SEPmDhVWZF0GTTHwjqjR+7DmiZHzZiFJ4qeAzmg==
+
 create-ecdh@^4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.3.tgz#c9111b6f33045c4697f144787f9254cdc77c45ff"
@@ -6990,6 +6995,13 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
+
+vue-countable@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/vue-countable/-/vue-countable-1.0.9.tgz#308e55d55f6d5361eebcb64ac0cbbc3808885e0b"
+  integrity sha512-kQ/ElhotJ8K3ThY/z9vyRtNlYC5QYur8aOy1sMinKctzRAkuEQtRKJL/BkyG8U3dKJjjVz8alAICqIls0KmnzQ==
+  dependencies:
+    countable "^3.0.1"
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"

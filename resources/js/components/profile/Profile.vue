@@ -55,7 +55,7 @@
                      class="flex w-full items-center transition translate-y-3 p-2 mb-4 w-full justify-center">
                     <form @submit.prevent="handleBioSubmite()"
                           class="flex w-full items-center transition translate-y-3 p-2 m-4 w-full justify-center">
-                                    <textarea @keyup='charCount()' v-model="bio" type="textarea"
+                                    <textarea  v-model="bio" type="textarea"
                                               placeholder="write your bio here"
                                               name="bio"
                                               id="bio"
@@ -68,9 +68,12 @@
                                   absolute
                                   right-0 text-sm  mx-8 focus:outline-none transition -translate-y-4"
                             :class="totalCharacter > 0 ? 'text-white font-medium bg-blue-400  rounded-full px-2 py-1 shadow hover:bg-gray-100 hover:text-blue-500'  : 'text-gray-400'"
-                            :disabled="totalCharacter > 0 ? false : true" type="submit"
+                            :disabled="totalCharacter<=0" type="submit"
                         >Save Bio
                         </button>
+                        <vue-countable :text="bio"   :elementId="'bio'" @change="change">
+
+                        </vue-countable>
                         <button
                             class="
                                   absolute
@@ -173,7 +176,12 @@
 
             cancleBio() {
                 this.bioFieldShowed = false;
-                this.getUserBio()
+                this.getUserBio();
+                this.totalCharacter = 0;
+             },
+
+             change(event) {
+                this.totalCharacter = event.all
              }
         }
     }

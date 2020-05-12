@@ -30,8 +30,10 @@ window.enableBodyScroll = bodyScrollLock.enableBodyScroll;
 window.targetElement = document.querySelector('#submitmodal');
 
 window.Vue = require('vue');
-// window.Vue = require('dayjs');
 
+
+import VueCountable from 'vue-countable';
+Vue.component('vue-countable', VueCountable)
 
 /**
  * The following block of code may be used to automatically register your
@@ -55,6 +57,9 @@ Vue.component('edit-modal', require('./components/timeline/editModal').default);
 Vue.component('tweet-editor-model', require('./components/timeline/TweetEditorModel').default);
 Vue.component('modal', require('./components/timeline/Modal').default);
 Vue.component('tweet-with-replies', require('./components/timeline/TweetWithReplies').default);
+Vue.component('publish-button', require('./components/publish-tweet-panal/button').default);
+Vue.component('textarea-field', require('./components/publish-tweet-panal/textArea').default);
+Vue.component('vue-countable', require('vue-countable').default);
 
 
 /**
