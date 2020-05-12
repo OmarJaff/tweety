@@ -23,4 +23,19 @@ class Tweet extends Model
     {
         return $this->hasMany(Reply::class);
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+    public function likesNumber()
+    {
+        return $this->hasMany(Like::class)->where('liked', true);
+    }
+
+    public function dislikes()
+    {
+        return $this->hasMany(Like::class)->where('liked', false);
+    }
+
 }

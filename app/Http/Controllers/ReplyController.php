@@ -40,7 +40,7 @@ class ReplyController extends Controller
     {
         $attribute = \request()->validate(['body'=>'required|max:255']);
         Reply::create([
-            'user_id'=> auth()->id(),
+             'user_id'=> auth()->id(),
              'tweet_id' => $tweetID,
              'body' => $attribute['body']
         ]);
@@ -63,12 +63,15 @@ class ReplyController extends Controller
                 'json' => function() use($tweet) {
                     return response()->json([
                         'tweet'=>$tweet,
+                        'likes_count'=>$tweet->likesNumber()->count(),
+                        'dislikes_count'=>$tweet->dislikes()->count(),
                         'user'=>$tweet->user,
-                        'replies'=>$tweet->replies()->with(['user:id,name,username,avatar'])->latest()->paginate(20)
+                        'replies'=>$tweet->replies()->with(['user:id,name,username,avatar'])->latest()->paginate(20),
+                        'replyNumber'=>$tweet->replies()->count(),
+
                     ]);
                 }
             ]);
-
     }
 
 

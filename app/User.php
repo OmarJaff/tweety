@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Gate;
 
 class User extends Authenticatable
 {
-    use Notifiable, Followable, Likable;
+    use Notifiable, Followable;
 
     /**
      * The attributes that are mass assignable.
@@ -45,9 +45,9 @@ class User extends Authenticatable
     {
         $friends = $this->follows()->pluck('id');
          return Tweet::whereIn('user_id', $friends)
-            ->orWhere('user_id', $this->id)->withLikes()
+            ->orWhere('user_id', $this->id)->withCount(['likesNumber','dislikes'])
              ->with(['user:id,username,avatar,name','likes:id,user_id,tweet_id,liked'])
-             ->with(['replies'])
+             ->with(['replies'])->withCount('replies')
             ->latest()->paginate(50);
     }
 

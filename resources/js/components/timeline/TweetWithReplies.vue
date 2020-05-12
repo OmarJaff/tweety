@@ -58,17 +58,21 @@
                 </div>
 
                 <div class="flex space-x-4 mb-6">
-<!--                    <like-button :likesNumber="tweetLikes.likes"-->
-<!--                                 @getTweets="getData()"-->
-<!--                                 :dislikesNumber="tweet.dislikes"-->
-<!--                                 @like="like"-->
-<!--                                 @dislike="dislike"-->
-<!--                                 :tweetID="tweet.id"-->
-<!--                                 :userLikes="tweet.likes"-->
-<!--                                 :userId=""-->
-<!--                    >-->
-<!--                    </like-button>-->
+                    <like-button :likesNumber="likes_count"
+                                 @getTweets="getData()"
+                                 :dislikesNumber="dislikes_count"
+                                 @like="like"
+                                 @dislike="dislike"
+                                 :tweetID="tweet.id"
+                                 :userLikes="userLikes"
+                                 :userId="user.id"
+                    >
+                    </like-button>
 
+                    <replay @replyAdded="getData()" :tweet="tweet.body"
+                            :userName="user.username"
+                            :repliesCount = "totalOfReplies"
+                            :tweetID="tweet.id"></replay>
 
 
                 </div>
@@ -123,7 +127,8 @@
     export default {
         name: 'tweet-with-replies',
         props: {
-            tweetId: {}
+            tweetId: {},
+            userLikes: {}
         },
         data: () => ({
             submissionModalShowed: false,
@@ -134,7 +139,10 @@
             tweet: {},
             user: {},
              replies: {},
-            tweetLikes: {}
+            tweetLikes: {},
+            totalOfReplies:{},
+            likes_count: 0,
+            dislikes_count: 0
         }),
         created() {
           this.getData();
@@ -145,15 +153,26 @@
                     response => {
                         this.tweet = response.data.tweet,
                             this.user = response.data.user,
-                        this.replies = response.data.replies.data
+                        this.replies = response.data.replies.data,
+                            this.totalOfReplies = response.data.replyNumber,
+                            this.likes_count = response.data.likes_count,
+                            this.dislikes_count=response.data.dislikes_count
                     }
                 ).catch(error => console.error(error))
             },
             like(tweetID) {
-                this.$emit('like', tweetID)
+                axios.post(`/tweets/${tweetID}/like`).then(
+                    () => {
+                        this.getData()
+                    }
+                ).catch(error => console.log(error));
             },
             dislike(tweetID) {
-                this.$emit('dislike', tweetID)
+                axios.delete(`/tweets/${tweetID}/like`).then(
+                    (response) => {
+                        this.getData()
+                    }
+                )
             },
             handleModelClose() {
                 enableBodyScroll(targetElement)
@@ -173,7 +192,6 @@
                 axios.delete(`/tweets/${this.tweetID}/delete`).then(() => {
                     window.location.replace("/tweets");
                 }).catch(error => console.error(error));
-
             },
 
             submitUpdateRequest(tweetID) {

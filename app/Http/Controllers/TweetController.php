@@ -27,6 +27,12 @@ class TweetController extends Controller
     }
 
 
+    public function tweetdata()
+    {
+        return response()->json(['tweets' => current_user()->timeline()]);
+    }
+
+
     public function store()
     {
         $attributes = \request()->validate([

@@ -4,8 +4,6 @@
 namespace App;
 
 
-
-
 //use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -16,11 +14,9 @@ trait Likable
     {
         $query->leftJoinSub(
             'select tweet_id, sum(liked) likesNum, sum(!liked) dislikes from likes group by tweet_id'
-            ,'likes', 'likes.tweet_id', 'tweets.id'
-            );
+            , 'likes', 'likes.tweet_id', 'tweets.id'
+        );
     }
-
-
 
 
     public function like($user = null, $liked = true)
@@ -35,32 +31,32 @@ trait Likable
         );
     }
 
-    public function unlinke($user) {
+    public function unlinke($user)
+    {
 
-        $this->likes()->where('user_id',$user->id)->delete();
+        $this->likes()->where('user_id', $user->id)->delete();
     }
 
     public function dislike($user = null)
     {
-         $this->like($user ,false);
+        $this->like($user, false);
     }
 
-    public  function isLikedBy(User $user)
+    public function isLikedBy(User $user)
     {
-        return (bool) $user->likes->
+        return (bool)$user->likes->
         where('tweet_id', $this->id)
-            ->where('liked', true )
+            ->where('liked', true)
             ->count();
     }
 
-    public  function isDislikedBy(User $user)
+    public function isDislikedBy(User $user)
     {
-        return (bool) $user->likes->
+        return (bool)$user->likes->
         where('tweet_id', $this->id)
-            ->where('liked', false )
+            ->where('liked', false)
             ->count();
     }
-
 
 
     public function likes()

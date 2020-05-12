@@ -47,9 +47,9 @@
                 </div>
 
                 <div class="flex space-x-4">
-                    <like-button :likesNumber="tweet.likesNum"
+                    <like-button :likesNumber="tweet.likes_number_count"
                                  @getTweets="getTweets()"
-                                 :dislikesNumber="tweet.dislikes"
+                                 :dislikesNumber="tweet.dislikes_count"
                                  @like="like"
                                  @dislike="dislike"
                                  :tweetID="tweet.id"
@@ -58,10 +58,12 @@
                     >
                     </like-button>
 
-                    <replay @replyAdded="getTweets()" :tweet="tweet.body"
+                    <replay @replyAdded="getTweets()"
+                            :tweet="tweet.body"
                             :userName="tweet.user.username"
-                            :replayID="tweet.id"
-                            :tweetID="tweet.id"></replay>
+                            :repliesCount = "tweet.replies_count"
+                            :tweetID="tweet.id">
+                    </replay>
 
 
                 </div>
@@ -112,6 +114,7 @@
             tweetID: '',
             editModel: false,
             tweetBody: '',
+
         }),
         methods: {
 

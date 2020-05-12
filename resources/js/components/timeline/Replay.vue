@@ -9,7 +9,7 @@
                           d="M18 5V13C18 14.1046 17.1046 15 16 15H11L6 19V15H4C2.89543 15 2 14.1046 2 13V5C2 3.89543 2.89543 3 4 3H16C17.1046 3 18 3.89543 18 5ZM7 8H5V10H7V8ZM9 8H11V10H9V8ZM15 8H13V10H15V8Z"
                           fill="currentColor"/>
                 </svg>
-                <h1 class="text-sm text-gray-600 font-medium">Reply</h1></div>
+                <h1 class="text-sm text-gray-600 font-medium">{{repliesCount}}</h1></div>
         </button>
 
 
@@ -50,14 +50,15 @@
     export default {
         props: {
             tweetID: {required: true},
-            replayID: {},
             userID: {},
             userName: {},
             tweet: {},
+            repliesCount: {},
         },
         data: () => ({
-            reply: '',
-            replayModalShowed: false
+            replayTotal:0,
+            replayModalShowed: false,
+            reply: ''
         }),
         methods: {
             addReply(id) {

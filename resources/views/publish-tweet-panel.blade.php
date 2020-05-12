@@ -1,8 +1,8 @@
-<div class="border border-blue-400 rounded-lg  px-8 py-6 mb-8" >
+<div class="border border-blue-400 rounded-lg  px-8 py-6 mb-4 sm:mb-8" >
     <form action="/tweets" method="post">
         @csrf
 
-        <div class="flex w-full border-b focus-within:border-blue-500 mb-6 ">
+        <div class="flex w-full border-b focus-within:border-blue-500 mb-6  ">
 
         <textarea
                   required
