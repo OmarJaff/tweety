@@ -1,6 +1,8 @@
 <x-app>
 
         <profile :user="{{$user}}"
+                 :followings="{{$followings}}"
+                 :followers="{{$followers}}"
                  :editable="{{$user->canEdit($user) ? 'true' : 'false'}}"
                  :is-current-user="{{current_user()->is($user) ? 'true' : 'false'}}"
         >

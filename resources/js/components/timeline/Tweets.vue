@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <div v-for="(tweet,index) in tweets" :key="tweet.id"
              class="flex p-4 border border-gray-300 rounded-lg my-4 relative">
             <div class="mr-2  flex-shrink-0">
@@ -11,10 +12,13 @@
             </div>
 
             <div class="space-y-2 w-full ">
-                <a :href="'/profiles/'+tweet.user.username"><h5 class="font-bold ">
+                <a :href="'/profiles/'+tweet.user.username">
+                    <h5 class="font-bold ">
                     {{tweet.user.name}}
+                        <p class="text-xs text-gray-500">{{tweet.created_at | diffForHumans}}</p>
                 </h5>
                 </a>
+
                 <p class="text-lg ">{{tweet.body}}</p>
 
                 <div v-if="isEditing && tweet.id === tweetID"
@@ -95,17 +99,15 @@
                 </template>
             </modal>
         </div>
+
     </div>
 </template>
 
 <script>
-
-
-
     export default {
         name: 'tweets',
         props: {
-            tweets: {type: Array, required: true},
+            tweets: {required: true},
             userId: {required: true},
         },
         data: () => ({
@@ -114,8 +116,15 @@
             tweetID: '',
             editModel: false,
             tweetBody: '',
-
         }),
+        filters: {
+            diffForHumans: (date) => {
+                if (!date) {
+                    return null;
+                }
+                return dayjs(date).fromNow();
+            }
+        },
         methods: {
 
             getTweets() {
@@ -167,8 +176,6 @@
                     ()=>this.getTweets()
                 ).catch(error=>console.error());
             }
-
         }
-
     }
 </script>

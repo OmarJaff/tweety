@@ -24,6 +24,9 @@
                 <div style="max-width: 270px">
                     <h2 class="font-bold text-2xl">{{user.name}}</h2>
                     <p class="text-sm">Joined {{user.created_at | diffForHumans}}</p>
+                    <div class=" my-3 text-gray-600  flex space-x-2 ">
+                        <p class="text-sm">Followers {{followers}} |</p>
+                        <p class="text-sm">Following {{followings}}</p></div>
                 </div>
                 <div class="space-x-2 flex ">
 
@@ -31,7 +34,7 @@
 
                 </div>
             </div>
-            <div v-if="editable" class="flex flex-col items-center">
+            <div v-if="editable" class="flex flex-col items-center transition -translate-y-12">
                 <div v-if="this.bio.length" class="items-center w-1/2 ">
                     <p class="text-sm p-2 my-4  items-center text-center text-gray-600">{{this.bio}}</p>
                     <div class="flex space-x-2">
@@ -88,7 +91,7 @@
                         class="flex-shrink-0 mx-2 text-gray-500 bottom-0 transition translate-y-4 text-sm absolute right-0">{{ totalCharacter }} / 200</span>
                 </div>
             </div>
-            <div v-else-if="user.bio" class="flex justify-center">
+            <div v-else-if="user.bio" class="flex justify-center transition -translate-y-12">
                 <p class="text-sm p-2 my-4  items-center text-center text-justify text-gray-600">
                     {{this.bio}}
                 </p>
@@ -110,6 +113,8 @@
         components: {},
         props: {
             user: {required: true},
+            followings : {required:true},
+            followers: {require:true},
             isCurrentUser: {
                 default: () => {
                 }, required: true

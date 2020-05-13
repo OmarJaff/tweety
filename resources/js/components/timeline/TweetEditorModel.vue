@@ -7,7 +7,7 @@
 <template>
     <div class="absolute inset-0 left-auto z-50 ">
         <div
-            class="  fixed bottom-0 left-0 w-full h-40 bg-gray-800  border-2 border-gray-200
+            class="fixed bottom-0 left-0 w-full h-40 bg-gray-800  border-2 border-gray-200
                 sm:bg-gray-100 sm:absolute transition sm:-translate-x-32 sm:bottom-auto
                 sm:my-3 sm:w-24 sm:h-20 sm:rounded-lg flex flex-col px-2 justify-center space-y-4 sm:space-y-2  sm:mx-1">
 

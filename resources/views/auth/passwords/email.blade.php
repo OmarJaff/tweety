@@ -36,7 +36,7 @@
                                     </div>
 
                                     <div class="relative flex justify-center text-sm leading-5">
-                                        <span class="px-2 bg-gray-200 text-green-500 font-medium">{{ session('status') }}</span>
+                                        <span class="px-2 bg-gray-100 text-green-500 font-medium">{{ session('status') }}</span>
                                     </div>
                                 </div>
                             @endif

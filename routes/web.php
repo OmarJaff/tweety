@@ -61,6 +61,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/explore', 'ExploreController@index');
 
+    Route::post('/explore', 'ExploreController@search');
+
     Route::get('/friends', 'FriendsController@show');
 
     Route::get('/tweets/{tweet}', 'ReplyController@show');

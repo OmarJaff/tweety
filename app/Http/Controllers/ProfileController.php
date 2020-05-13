@@ -11,13 +11,16 @@ class ProfileController extends Controller
 {
     public function show(User $user)
     {
-
         return \request()->match([
             'html' => function () use ($user) {
-                return view('profiles.show', ['user' => $user, 'tweets' => $user->tweets()->withLikes()->paginate(50)]);
+                return view('profiles.show', ['user' => $user, 'tweets' => $user->tweets()->paginate(50),
+                    'followings' => $user ->follows->count(), 'followers' => $user->followers->count()
+                    ] );
             },
             'json' => function () use ($user) {
-                return response()->json(['tweets' => $user->tweets()->withLikes()->with(['user:id,username,avatar,name'])->with(['likes:id,user_id,tweet_id,liked'])->with(['replies'])->paginate(50)]);
+                return response()->json(['tweets' => $user->tweets()->withCount(['likesNumber','dislikes'])
+                    ->with(['user:id,username,avatar,name'])->with(['likes:id,user_id,tweet_id,liked'])
+                    ->with(['replies'])->paginate(50)]);
             }
         ]);
     }

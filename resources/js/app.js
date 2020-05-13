@@ -40,6 +40,9 @@ Vue.use(Vuex)
 
 import storeData from "./store/index";
 
+import { ContentLoader } from 'vue-content-loader'
+
+
 const store = new Vuex.Store(
     storeData
 )

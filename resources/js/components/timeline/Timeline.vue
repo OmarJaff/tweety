@@ -1,6 +1,8 @@
 <template>
-    <div class="">
-        <div v-cloak v-if="tweets.data && tweets.data.length">
+    <div>
+        <FacebookLoader :primaryOpacity="2" v-if="isLoading" :uniqueKey="'tweetspro'">
+        </FacebookLoader>
+        <div  v-if="tweets.total !== 0">
             <tweets @getTweets="getTweets()"
                     @like="like"
                     @dislike="dislike"
@@ -8,8 +10,7 @@
                     :userId="currentUser">
             </tweets>
         </div>
-
-        <div v-else-if="user" class="container">
+        <div v-else-if="user && tweets.total === 0" class="container">
             <h1   class="text-gray-600 text-lg sm:text-3xl text-center">
                 No tweets yet</h1>
             <div class="w-60 w-60 m-4">
@@ -28,15 +29,10 @@
                     <path d="M540.841 379.776H168.953V394.258H540.841V379.776Z" fill="white"/>
                     <path d="M540.841 414.531H168.953V429.013H540.841V414.531Z" fill="white"/>
                 </svg>
-
-
             </div>
-
-
-
         </div>
 
-        <div v-else  class="flex flex-col w-full flex-col-reverse relative mb-10 sm:mb-0 ">
+        <div v-else-if="tweets.total === 0"  class="flex flex-col w-full flex-col-reverse relative mb-10 sm:mb-0 ">
             <svg class="container h-64 sm:h-full w-full"
                  width="991" height="596"
                  viewBox="0 0 991 596" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -81,14 +77,19 @@
 
 
 <script>
+    import {FacebookLoader} from "vue-content-loader";
+
     export default {
         name: 'timeline',
-
+        components: {
+            FacebookLoader
+        },
         data: () => ({
             tweets: {},
             replyNumbers:{},
             liked: '',
             disliked: '',
+            isLoading: false,
         }),
         props: {
             currentUser: {
@@ -104,19 +105,22 @@
             }
         },
         created() {
-            this.getTweets()
+            this.getTweets();
+
         },
 
         methods: {
             getTweets() {
+                this.isLoading=true;
                 if (this.user) {
                     return axios.get(`/profiles/${this.user.username}`).then((response) => {
                         this.tweets = response.data.tweets
-
+                        this.isLoading=false
                     }).catch(error => console.log(error))
                 }
                 return axios.get('/tweets/tweetdata').then((response) => {
                     this.tweets = response.data.tweets;
+                    this.isLoading=false
                 }).catch(error => console.log(error))
             },
 
