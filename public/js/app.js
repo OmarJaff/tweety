@@ -2221,6 +2221,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {},
   props: {
@@ -2247,7 +2268,8 @@ __webpack_require__.r(__webpack_exports__);
       title: 'this is title',
       bio: '',
       totalCharacter: 0,
-      bioFieldShowed: false
+      bioFieldShowed: false,
+      confirmationModel: false
     };
   },
   created: function created() {
@@ -2301,6 +2323,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios["delete"]("/bio/".concat(this.user.username, "/delete")).then(function () {
         _this3.getUserBio();
+
+        _this3.confirmationModel = false;
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -41416,7 +41440,7 @@ var render = function() {
                                 "text-sm text-gray-600 border-b-2  hover:border-red-400 focus:outline-none outline-none justify-center flex items-center w-full",
                               on: {
                                 click: function($event) {
-                                  return _vm.handleRemoveBio()
+                                  _vm.confirmationModel = true
                                 }
                               }
                             },
@@ -41581,7 +41605,71 @@ var render = function() {
             ]
           )
         : _vm._e()
-    ])
+    ]),
+    _vm._v(" "),
+    _vm.confirmationModel === true
+      ? _c(
+          "div",
+          [
+            _c(
+              "modal",
+              {
+                on: {
+                  close: function($event) {
+                    _vm.confirmationModel = false
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n            You are about to delete your bio?\n            "
+                ),
+                _c("template", { slot: "footer" }, [
+                  _c("div", { staticClass: "flex space-x-4 mx-4" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "  focus:outline-none outline-none text-gray-600 border-2\n                        border-gray-400 rounded-full py-2 px-4\n                        text-lg hover:bg-gray-300 hover:text-gray-800\n                          font-bold",
+                        on: {
+                          click: function($event) {
+                            return _vm.handleRemoveBio()
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Sure, delete it\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "focus:outline-none outline-none\n                            text-gray-600 btn-link text-lg\n                            font-bold  hover:text-blue-600",
+                        on: {
+                          click: function($event) {
+                            _vm.confirmationModel = false
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Cancel\n                    "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ],
+              2
+            )
+          ],
+          1
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []

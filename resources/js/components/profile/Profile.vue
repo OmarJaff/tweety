@@ -42,7 +42,7 @@
                                 class="text-sm text-gray-600 border-b-2  hover:border-blue-400 focus:outline-none outline-none justify-center flex items-center w-full">
                             Edit bio
                         </button>
-                        <button v-if="!bioFieldShowed" @click="handleRemoveBio()"
+                        <button v-if="!bioFieldShowed" @click="confirmationModel = true"
                                 class="text-sm text-gray-600 border-b-2  hover:border-red-400 focus:outline-none outline-none justify-center flex items-center w-full">
                             Remove bio
                         </button>
@@ -96,11 +96,32 @@
                 <p class="text-sm p-2 my-4  items-center text-center text-justify text-gray-600">
                     {{this.bio}}
                 </p>
-
             </div>
-
         </header>
 
+        <div v-if="confirmationModel === true">
+            <modal @close="confirmationModel = false">
+                You are about to delete your bio?
+                <template slot="footer">
+                    <div class="flex space-x-4 mx-4">
+                        <button
+                            @click="handleRemoveBio()"
+                            class="  focus:outline-none outline-none text-gray-600 border-2
+                            border-gray-400 rounded-full py-2 px-4
+                            text-lg hover:bg-gray-300 hover:text-gray-800
+                              font-bold">
+                            Sure, delete it
+                        </button>
+                        <button @click="confirmationModel = false"
+                                class="focus:outline-none outline-none
+                                text-gray-600 btn-link text-lg
+                                font-bold  hover:text-blue-600">
+                            Cancel
+                        </button>
+                    </div>
+                </template>
+            </modal>
+        </div>
     </div>
 </template>
 
@@ -129,8 +150,8 @@
             title: 'this is title',
             bio: '',
             totalCharacter: 0,
-            bioFieldShowed: false
-
+            bioFieldShowed: false,
+            confirmationModel: false
         }),
         created() {
             this.getUserBio()
@@ -177,6 +198,7 @@
             handleRemoveBio() {
                 axios.delete(`/bio/${this.user.username}/delete`).then(() => {
                     this.getUserBio();
+                    this.confirmationModel = false;
                 }).catch(error => console.log(error))
             },
 
