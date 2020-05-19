@@ -2351,7 +2351,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2361,15 +2360,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
   },
-  created: function created() {
-    this.isEnabled;
-    console.log(this.isEnabled);
-  },
+  created: function created() {},
   computed: {
     isEnabled: function isEnabled() {
       return this.$store.state.disabled;
@@ -41723,21 +41720,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "button",
-    {
-      staticClass:
-        " bg-blue-500 hover:bg-blue-600 shadow px-2 py-2 rounded-full text-white disabled:bg-blue-300 focus:outline-none",
-      class: !_vm.isEnabled ? "cursor-not-allowed" : "",
-      attrs: { disabled: !_vm.isEnabled, type: "submit" },
-      on: {
-        click: function($event) {
-          return _vm.submitMutaion()
+  return _c("div", { attrs: { "aria-disabled": !_vm.isEnabled } }, [
+    _c(
+      "button",
+      {
+        staticClass:
+          " bg-blue-500 hover:bg-blue-600 shadow px-2 py-2 rounded-full text-white disabled:bg-blue-300 focus:outline-none",
+        class: !_vm.isEnabled ? "cursor-not-allowed" : "",
+        attrs: { disabled: !_vm.isEnabled, type: "submit" },
+        on: {
+          click: function($event) {
+            return _vm.submitMutaion()
+          }
         }
-      }
-    },
-    [_vm._v("\n    Tweet-a-roo!\n")]
-  )
+      },
+      [_vm._v("\n        Tweet-a-roo!\n    ")]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

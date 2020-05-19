@@ -23,6 +23,7 @@
 
 <script>
     import  {mapMutations} from 'vuex';
+
     export default {
         name: 'textarea-tweet',
         data: ()=>({
@@ -30,6 +31,7 @@
             myId:"body",
             charNum: 0,
         }),
+
         computed:mapMutations(['disabled']),
         methods: {
             change(event) {
