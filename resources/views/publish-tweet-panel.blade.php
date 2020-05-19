@@ -3,17 +3,18 @@
         @csrf
 
         <div class="flex w-full border-b focus-within:border-blue-500 mb-6  ">
-            <textarea-field></textarea-field>
+            <textarea-tweet></textarea-tweet>
         </div>
 
         <footer class="flex justify-between items-center">
             <img src="{{auth()->user()->avatar}}"
                  alt="your avatar"
                  class="rounded-full mr-2 w-10 h-10">
-            <publish-button></publish-button>
+            <publish-tweet-button></publish-tweet-button>
         </footer>
         @error('body')
         <h1 class="text-red-500 mt-2 font-semibold text-sm">{{$message}}</h1>
         @enderror
     </form>
 </div>
+

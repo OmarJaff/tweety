@@ -22,16 +22,20 @@
 
 
 <script>
+    import  {mapMutations} from 'vuex';
     export default {
-        name: 'text-area',
+        name: 'textarea-tweet',
         data: ()=>({
             myTweet:"",
             myId:"body",
             charNum: 0,
         }),
+        computed:mapMutations(['disabled']),
         methods: {
             change(event) {
             this.charNum = event.all;
+                let bool = this.charNum > 0
+            this.$store.commit('enableTweetButton', bool )
              }
         }
     }

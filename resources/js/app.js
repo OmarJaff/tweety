@@ -71,8 +71,8 @@ Vue.component('edit-modal', require('./components/timeline/editModal').default);
 Vue.component('tweet-editor-model', require('./components/timeline/TweetEditorModel').default);
 Vue.component('modal', require('./components/timeline/Modal').default);
 Vue.component('tweet-with-replies', require('./components/timeline/TweetWithReplies').default);
-Vue.component('publish-button', require('./components/publish-tweet-panal/button').default);
-Vue.component('textarea-field', require('./components/publish-tweet-panal/textArea').default);
+Vue.component('publish-tweet-button', require('./components/publish-tweet-panal/PublishTweetButton').default);
+Vue.component('textarea-tweet', require('./components/publish-tweet-panal/TweetTextarea').default);
 Vue.component('vue-countable', require('vue-countable').default);
 
 

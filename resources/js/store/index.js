@@ -1,13 +1,12 @@
 export default {
     state: {
-
-        category: []
-
+        disabled: false,
     },
 
     getters: {
-
-
+        buttonState: (state) => {
+            return state.disabled;
+        }
 
     },
 
@@ -16,6 +15,8 @@ export default {
     },
 
     mutations: {
-
+        enableTweetButton (state, val) {
+            state.disabled = val
+        }
     }
 }
