@@ -25,7 +25,7 @@
                      class="absolute bg-white rounded-lg w-full inset-0 z-10">
                     <form @submit.prevent="submitUpdateRequest(tweet.id)">
                         <div class="mx-8 my-2">
-                                <textarea name="body"  v-model="tweetBody"
+                                <textarea name="body" v-autofocus  v-model="tweetBody"
                                           class="w-full border-b-2 focus:outline-none focus:border-blue-300"></textarea>
                         </div>
                         <div class="flex flex-row justify-end w-full space-x-4 -mx-8 my-3">

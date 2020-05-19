@@ -58,10 +58,11 @@
                      class="flex w-full items-center transition translate-y-3 p-2 mb-4 w-full justify-center">
                     <form @submit.prevent="handleBioSubmite()"
                           class="flex w-full items-center transition translate-y-3 p-2 m-4 w-full justify-center">
-                                    <textarea  v-model="bio" type="textarea"
+                                    <textarea v-model="bio" type="textarea"
                                               placeholder="write your bio here"
                                               name="bio"
                                               id="bio"
+                                              v-autofocus
                                               class="w-full border-gray-300 border-b-2 w-full focus:outline-none outline-none focus:border-blue-400"
                                               maxlength="200">
                                    </textarea>

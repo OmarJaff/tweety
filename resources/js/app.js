@@ -35,13 +35,16 @@ window.Vue = require('vue');
 import VueCountable from 'vue-countable';
 Vue.component('vue-countable', VueCountable)
 
-import Vuex from 'vuex'
+import Vuex from 'vuex';
+
 Vue.use(Vuex)
 
 import storeData from "./store/index";
 
 import { ContentLoader } from 'vue-content-loader'
 
+import autofocus from 'vue-autofocus-directive';
+Vue.directive('autofocus', autofocus);
 
 const store = new Vuex.Store(
     storeData
