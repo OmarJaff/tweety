@@ -36,6 +36,7 @@
         "vue-autofocus-directive": "^1.0.4",
         "vue-content-loader": "^0.2.3",
         "vue-countable": "^1.0.9",
+        "vue-infinite-loading": "^2.4.5",
         "vue-turbolinks": "^2.1.0"
     }
 }

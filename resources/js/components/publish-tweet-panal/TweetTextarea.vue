@@ -10,7 +10,6 @@
         maxlength="202"
         class="w-full py-4  focus:outline-none"
         placeholder="what's up?">
-
         </textarea>
         <span class="text-gray-600 w-full flex justify-end">{{charNum}}/202</span>
 

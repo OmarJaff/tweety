@@ -1,5 +1,5 @@
 module.exports = {
-  purge: ['./resources/views/components/master.blade.php'] ,
+  purge: [ ] ,
   target: 'ie11',
   theme: {
     extend: {},

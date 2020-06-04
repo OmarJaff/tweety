@@ -41,7 +41,7 @@ Vue.use(Vuex)
 
 import storeData from "./store/index";
 
-import { ContentLoader } from 'vue-content-loader'
+
 
 import autofocus from 'vue-autofocus-directive';
 Vue.directive('autofocus', autofocus);
@@ -74,14 +74,14 @@ Vue.component('tweet-with-replies', require('./components/timeline/TweetWithRepl
 Vue.component('publish-tweet-button', require('./components/publish-tweet-panal/PublishTweetButton').default);
 Vue.component('textarea-tweet', require('./components/publish-tweet-panal/TweetTextarea').default);
 Vue.component('vue-countable', require('vue-countable').default);
+Vue.component('InfiniteLoading', require('vue-infinite-loading').default);
 
-
+bodyScrollLock
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-const vuetifyOptions = {};
 
 document.addEventListener('turbolinks:load', () => {
     const app = new Vue({

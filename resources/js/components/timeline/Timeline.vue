@@ -4,11 +4,14 @@
         </FacebookLoader>
         <div  v-if="tweets.total !== 0">
             <tweets @getTweets="getTweets()"
+                    @infiniteHandler="infiniteHandler"
                     @like="like"
                     @dislike="dislike"
-                    :tweets="tweets.data"
-                    :userId="currentUser">
+                     :tweets="tweets"
+                     :userId="currentUser">
+
             </tweets>
+
         </div>
         <div v-else-if="user && tweets.total === 0" class="container">
             <h1   class="text-gray-600 text-lg sm:text-3xl text-center">
@@ -56,12 +59,15 @@
                 </defs>
 
             </svg>
-
                 <h1
                 class=" mt-16 sm:block transition translate-y-40 sm:translate-y-0 text-lg px-8 sm:transition-none absolute sm:text-4xl  my-8 -ml-4  sm:my-16 sm:w-1/3 sm:pl-10 sm:py-10  inset-0 text-gray-500  sm:p-2 ">
                 <a href="/explore" class="text-blue-500 pr-2">Explore</a>other users and follow new friends</h1>
         </div>
-
+        <infinite-loading    @infinite="infiniteHandler">
+                     <span slot="no-more">
+                             There is no more Hacker News :(
+                     </span>
+        </infinite-loading>
 
     </div>
 </template>
@@ -75,13 +81,6 @@
         components: {
             FacebookLoader
         },
-        data: () => ({
-            tweets: {},
-            replyNumbers:{},
-            liked: '',
-            disliked: '',
-            isLoading: false,
-        }),
         props: {
             currentUser: {
                 default: () => {
@@ -95,27 +94,61 @@
                 }
             }
         },
+        data: () => ({
+            tweets: [],
+            replyNumbers:{},
+            liked: '',
+            disliked: '',
+            isLoading: false,
+            page: 1,
+        }),
+
         created() {
             this.isLoading=true;
-            this.getTweets();
-            this.isLoading=false;
-
+              this.isLoading=false;
         },
 
         methods: {
             getTweets() {
+                // if (this.user) {
+                //     return axios.get(`/profiles/${this.user.username}`).then((response) => {
+                //         this.tweets = response.data.tweets
+                //         this.isLoading=false
+                //     }).catch(error => console.log(error))
+                // }
+                // return axios.get('/tweets/tweetdata').then((response) => {
+                //     this.tweets = response.data.tweets;
+                //     this.isLoading=false
+                // }).catch(error => console.log(error))
+            },
+
+            infiniteHandler($state)
+            {
                 if (this.user) {
-                    return axios.get(`/profiles/${this.user.username}`).then((response) => {
-                        this.tweets = response.data.tweets
+                    return axios.get(`/profiles/${this.user.username}?page=${this.page}`).then((response) => {
+                        this.tweets.push(...response.data.tweets.data)
                         this.isLoading=false
                     }).catch(error => console.log(error))
                 }
-                return axios.get('/tweets/tweetdata').then((response) => {
-                    this.tweets = response.data.tweets;
-                    this.isLoading=false
-                }).catch(error => console.log(error))
-            },
+                  axios.get(`/tweets/tweetdata?page=${this.page}`).then(
+                    response => {
+                        if(response.data.tweets.data.length) {
+                            this.page += 1;
+                            this.tweets.push(...response.data.tweets.data);
+                            console.log('worked!')
+                            console.log(response.data.tweets.data.length)
+                            $state.loaded();
+                        } else {
+                            console.log("i worked this time")
+                            $state.complete();
+                        }
+                    }
 
+                ).catch(error => console.error())
+
+
+
+            },
             dislike(tweetID) {
                 axios.delete(`/tweets/${tweetID}/like`).then(
                     (response) => {
@@ -131,8 +164,6 @@
                     }
                 ).catch(error => console.log(error));
             },
-
-
         }
     }
 </script>

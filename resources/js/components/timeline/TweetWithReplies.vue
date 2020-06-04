@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <div class="p-4 flex">
             <a href="/tweets" class="flex items-center space-x-2">
                 <svg class="text-gray-600" width="20" height="20" viewBox="0 0 20 20" fill="currentColor"
@@ -12,8 +13,11 @@
         </div>
 
         <div
-             class="flex p-8 border border-gray-300 rounded-lg my-4 relative">
-            <div class="mr-2  flex-shrink-0">
+             class="flex flex-col p-8 border border-gray-300 rounded-lg my-4 relative">
+
+            <div class="border-2 p-4 rounded-lg w-full flex relative">
+             <div class="mr-2  flex-shrink-0">
+
                 <a :href="'/profiles/'+user.username">
                     <img :src="user.avatar"
                          alt=""
@@ -22,11 +26,16 @@
             </div>
 
             <div class="space-y-2 w-full ">
-                <a :href="'/profiles/'+user.username"><h5 class="font-bold ">
-                    {{user.name}}
-                </h5>
+
+                    <a :href="'/profiles/'+user.username">
+                    <h5 class="font-bold ">
+                        {{user.name}}
+                        <p class="text-xs text-gray-500">{{tweet.created_at | diffForHumans}}</p>
+
+                    </h5>
                 </a>
-                <p class="text-lg pb-4 ">{{tweet.body}}</p>
+                    <p class="text-lg pb-4 text-xl">{{tweet.body}}</p>
+
 
                 <div v-if="isEditing"
                      class=" bg-white rounded-lg w-full inset-0 z-10">
@@ -38,7 +47,7 @@
                         <div class="flex flex-row justify-end w-full space-x-4 -mx-8 my-3">
                             <button
                                 type="submit"
-                                class="rounded-full bg-blue-400 text-white px-3 py-1 font-bold text-sm focus:outline-none hover:bg-blue-600 fo">
+                                class="rounded-full bg-blue-400 text-white px-3 py-1 font-bold text-sm focus:outline-none hover:bg-blue-600 ">
                                 Update Tweet
                             </button>
                             <button @click="isEditing = false">Cancel</button>
@@ -47,7 +56,7 @@
                 </div>
 
 
-                <div v-if="user.id === tweet.user_id">
+                <div v-if="currentUser === user.id">
                     <edit-modal
                         :tweetId="tweet.id"
                         :tweetBody="tweet.body"
@@ -57,7 +66,7 @@
                     </edit-modal>
                 </div>
 
-                <div class="flex space-x-4 mb-6">
+                <div class="flex space-x-4">
                     <like-button :likesNumber="likes_count"
                                  @getTweets="getData()"
                                  :dislikesNumber="dislikes_count"
@@ -74,25 +83,27 @@
                             :repliesCount = "totalOfReplies"
                             :tweetID="tweet.id"></replay>
 
-
                 </div>
-                <div class="p-4 border-2 border-gray-300 rounded-lg  space-y-2 my-4" v-for="(reply,index) in replies" :key="reply.id">
-                        <div class="flex flex-col w-full">
-                            <div class="mr-2   flex space-x-1">
-                                <a class="flex-shrink-0" :href="'/profiles/'+reply.user.username">
-                                    <img :src="reply.user.avatar"
-                                         alt=""
-                                         class="rounded-full mr-2 w-8 h-8"/>
-                                </a>
-                                <div class="flex-col"><a :href="'/profiles/'+reply.user.username"><h5 class="font-bold ">
-                                    {{reply.user.name}}
-                                </h5>
-                                </a>
-                                    <h1 class="text-gray-700 font-semibold py-2">{{reply.body}}</h1></div>
-                            </div>
-                        </div>
-
                 </div>
+            </div>
+
+            <div class="ml-6 p-4 border-2 border-gray-300 rounded-lg  space-y-2 my-4" v-for="(reply,index) in replies" :key="reply.id">
+                <div class="flex flex-col w-full">
+                    <div class="mr-2   flex space-x-1">
+                        <a class="flex-shrink-0" :href="'/profiles/'+reply.user.username">
+                            <img :src="reply.user.avatar"
+                                 alt=""
+                                 class="rounded-full mr-2 w-8 h-8"/>
+                        </a>
+                        <div class="flex-col"><a :href="'/profiles/'+reply.user.username"><h5 class="font-bold ">
+                            {{reply.user.name}}
+                            <p class="text-xs text-gray-500">{{reply.created_at | diffForHumans}}</p>
+                        </h5>
+                        </a>
+                            <h1 class="text-gray-700 font-semibold py-2 sm:text-lg">{{reply.body}}</h1></div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -119,6 +130,7 @@
                 </template>
             </modal>
         </div>
+
     </div>
 </template>
 
@@ -128,7 +140,16 @@
         name: 'tweet-with-replies',
         props: {
             tweetId: {},
-            userLikes: {}
+            userLikes: {},
+            currentUser: {}
+        },
+        filters: {
+            diffForHumans: (date) => {
+                if (!date) {
+                    return null;
+                }
+                return dayjs(date).fromNow();
+            }
         },
         data: () => ({
             submissionModalShowed: false,

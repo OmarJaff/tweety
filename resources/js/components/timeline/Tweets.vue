@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <div v-for="(tweet,index) in tweets" :key="tweet.id"
              class="flex p-4 border border-gray-300 rounded-lg my-4 relative">
             <div class="mr-2  flex-shrink-0">
@@ -74,6 +73,7 @@
                 <div v-if="Object.keys(tweet.replies).length !== 0" class="pt-4">
                     <a class="text-blue-500  font-medium pt-3" :href="'/tweets/'+tweet.id">view replies</a></div>
             </div>
+
         </div>
 
         <div v-if="submissionModalShowed === true">
@@ -101,6 +101,7 @@
         </div>
 
     </div>
+
 </template>
 
 <script>
@@ -156,7 +157,9 @@
                 }).catch(error => console.error(error));
 
             },
-
+            infiniteHandler($state) {
+                this.$emit('infiniteHandler', $state)
+            },
             submitUpdateRequest(tweetID) {
                 this.isEditing = false
               axios.patch(`/tweets/${tweetID}/update`, {body: this.tweetBody}).then(()=>{

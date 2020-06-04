@@ -12,11 +12,9 @@
 
          <div class="flex">
 
-
             <livewire:like-button />
             <span>{{$tweet->likes}}</span>
             <livewire:dislike-button />
-
 
 
         </div>
