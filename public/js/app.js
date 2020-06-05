@@ -2831,7 +2831,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       liked: '',
       disliked: '',
       isLoading: false,
-      page: 1
+      page: 1,
+      infiniteId: +new Date()
     };
   },
   created: function created() {
@@ -2839,27 +2840,27 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.isLoading = false;
   },
   methods: {
-    getTweets: function getTweets() {// if (this.user) {
-      //     return axios.get(`/profiles/${this.user.username}`).then((response) => {
-      //         this.tweets = response.data.tweets
-      //         this.isLoading=false
-      //     }).catch(error => console.log(error))
-      // }
-      // return axios.get('/tweets/tweetdata').then((response) => {
-      //     this.tweets = response.data.tweets;
-      //     this.isLoading=false
-      // }).catch(error => console.log(error))
+    refresh: function refresh() {
+      this.page = 1;
+      this.tweets = [];
+      this.infiniteId += 1;
     },
     infiniteHandler: function infiniteHandler($state) {
       var _this = this;
 
       if (this.user) {
         return axios.get("/profiles/".concat(this.user.username, "?page=").concat(this.page)).then(function (response) {
-          var _this$tweets;
+          if (response.data.tweets.data.length) {
+            var _this$tweets;
 
-          (_this$tweets = _this.tweets).push.apply(_this$tweets, _toConsumableArray(response.data.tweets.data));
+            _this.page += 1;
 
-          _this.isLoading = false;
+            (_this$tweets = _this.tweets).push.apply(_this$tweets, _toConsumableArray(response.data.tweets.data));
+
+            $state.loaded();
+          } else {
+            $state.complete();
+          }
         })["catch"](function (error) {
           return console.log(error);
         });
@@ -2873,11 +2874,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
           (_this$tweets2 = _this.tweets).push.apply(_this$tweets2, _toConsumableArray(response.data.tweets.data));
 
-          console.log('worked!');
-          console.log(response.data.tweets.data.length);
           $state.loaded();
         } else {
-          console.log("i worked this time");
           $state.complete();
         }
       })["catch"](function (error) {
@@ -2888,14 +2886,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       var _this2 = this;
 
       axios["delete"]("/tweets/".concat(tweetID, "/like")).then(function (response) {
-        _this2.getTweets();
+        _this2.refresh();
       });
     },
     like: function like(tweetID) {
       var _this3 = this;
 
       axios.post("/tweets/".concat(tweetID, "/like")).then(function () {
-        _this3.getTweets();
+        _this3.refresh();
       })["catch"](function (error) {
         return console.log(error);
       });
@@ -3379,7 +3377,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getTweets: function getTweets() {
-      this.$emit('getTweets');
+      this.$emit('refresh');
     },
     like: function like(tweetID) {
       this.$emit('like', tweetID);
@@ -3404,7 +3402,7 @@ __webpack_require__.r(__webpack_exports__);
       this.editModel = false;
       enableBodyScroll(targetElement);
       axios["delete"]("/tweets/".concat(this.tweetID, "/delete")).then(function () {
-        _this.getTweets();
+        _this.refresh();
       })["catch"](function (error) {
         return console.error(error);
       });
@@ -3419,7 +3417,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.patch("/tweets/".concat(tweetID, "/update"), {
         body: this.tweetBody
       }).then(function () {
-        _this2.getTweets();
+        _this2.refresh();
       })["catch"](function (error) {
         return console.error(error);
       });
@@ -3434,7 +3432,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       axios["delete"]("replies/".concat(id)).then(function () {
-        return _this3.getTweets();
+        return _this3.refresh();
       })["catch"](function (error) {
         return console.error();
       });
@@ -42336,8 +42334,8 @@ var render = function() {
               _c("tweets", {
                 attrs: { tweets: _vm.tweets, userId: _vm.currentUser },
                 on: {
-                  getTweets: function($event) {
-                    return _vm.getTweets()
+                  refresh: function($event) {
+                    return _vm.refresh()
                   },
                   infiniteHandler: _vm.infiniteHandler,
                   like: _vm.like,
@@ -42593,13 +42591,14 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c("infinite-loading", { on: { infinite: _vm.infiniteHandler } }, [
-        _c("span", { attrs: { slot: "no-more" }, slot: "no-more" }, [
-          _vm._v(
-            "\n                         There is no more Hacker News :(\n                 "
-          )
-        ])
-      ])
+      _c(
+        "infinite-loading",
+        {
+          attrs: { identifier: _vm.infiniteId },
+          on: { infinite: _vm.infiniteHandler }
+        },
+        [_c("span", { attrs: { slot: "no-more" }, slot: "no-more" })]
+      )
     ],
     1
   )
@@ -43309,7 +43308,7 @@ var render = function() {
                     },
                     on: {
                       getTweets: function($event) {
-                        return _vm.getTweets()
+                        return _vm.refresh()
                       },
                       like: _vm.like,
                       dislike: _vm.dislike
@@ -43325,7 +43324,7 @@ var render = function() {
                     },
                     on: {
                       replyAdded: function($event) {
-                        return _vm.getTweets()
+                        return _vm.refresh()
                       }
                     }
                   })

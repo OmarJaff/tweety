@@ -51,7 +51,7 @@
 
                 <div class="flex space-x-4">
                     <like-button :likesNumber="tweet.likes_number_count"
-                                 @getTweets="getTweets()"
+                                 @getTweets="refresh()"
                                  :dislikesNumber="tweet.dislikes_count"
                                  @like="like"
                                  @dislike="dislike"
@@ -61,7 +61,7 @@
                     >
                     </like-button>
 
-                    <replay @replyAdded="getTweets()"
+                    <replay @replyAdded="refresh()"
                             :tweet="tweet.body"
                             :userName="tweet.user.username"
                             :repliesCount = "tweet.replies_count"
@@ -129,7 +129,7 @@
         methods: {
 
             getTweets() {
-                this.$emit('getTweets')
+                this.$emit('refresh')
             },
             like(tweetID) {
                 this.$emit('like', tweetID)
@@ -153,7 +153,7 @@
                 this.editModel = false
                 enableBodyScroll(targetElement)
                 axios.delete(`/tweets/${this.tweetID}/delete`).then(() => {
-                    this.getTweets()
+                    this.refresh()
                 }).catch(error => console.error(error));
 
             },
@@ -163,7 +163,7 @@
             submitUpdateRequest(tweetID) {
                 this.isEditing = false
               axios.patch(`/tweets/${tweetID}/update`, {body: this.tweetBody}).then(()=>{
-                  this.getTweets()
+                  this.refresh()
               }).catch(error =>console.error(error))
             },
 
@@ -176,7 +176,7 @@
 
             deleteReplay(id) {
                 axios.delete(`replies/${id}`).then(
-                    ()=>this.getTweets()
+                    ()=>this.refresh()
                 ).catch(error=>console.error());
             }
         }

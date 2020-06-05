@@ -3,7 +3,7 @@
         <FacebookLoader :primaryOpacity="2" v-if="isLoading" :uniqueKey="'tweetspro'">
         </FacebookLoader>
         <div  v-if="tweets.total !== 0">
-            <tweets @getTweets="getTweets()"
+            <tweets @refresh="refresh()"
                     @infiniteHandler="infiniteHandler"
                     @like="like"
                     @dislike="dislike"
@@ -63,15 +63,14 @@
                 class=" mt-16 sm:block transition translate-y-40 sm:translate-y-0 text-lg px-8 sm:transition-none absolute sm:text-4xl  my-8 -ml-4  sm:my-16 sm:w-1/3 sm:pl-10 sm:py-10  inset-0 text-gray-500  sm:p-2 ">
                 <a href="/explore" class="text-blue-500 pr-2">Explore</a>other users and follow new friends</h1>
         </div>
-        <infinite-loading    @infinite="infiniteHandler">
+        <infinite-loading :identifier="infiniteId"   @infinite="infiniteHandler">
                      <span slot="no-more">
-                             There is no more Hacker News :(
+
                      </span>
         </infinite-loading>
 
     </div>
 </template>
-
 
 <script>
     import {FacebookLoader} from "vue-content-loader";
@@ -101,46 +100,55 @@
             disliked: '',
             isLoading: false,
             page: 1,
+            infiniteId: +new Date()
         }),
 
-        created() {
+        mounted() {
             this.isLoading=true;
-              this.isLoading=false;
+            this.isLoading=false;
         },
 
         methods: {
-            getTweets() {
-                // if (this.user) {
-                //     return axios.get(`/profiles/${this.user.username}`).then((response) => {
-                //         this.tweets = response.data.tweets
-                //         this.isLoading=false
-                //     }).catch(error => console.log(error))
-                // }
-                // return axios.get('/tweets/tweetdata').then((response) => {
-                //     this.tweets = response.data.tweets;
-                //     this.isLoading=false
-                // }).catch(error => console.log(error))
+            refresh() {
+                console.log('refreshed!')
+                // this.page = 1;
+                // this.tweets = [];
+                // this.infiniteId += 1;
             },
-
+            getData() {
+                axios.get(`/tweets/tweetdata?page=${this.page}`).then(
+                    response => {
+                        response.data.tweets.data.map(tweet => {
+                            if(!this.tweets.includes(tweet)) {
+                                this.tweets.push(tweet)
+                            }
+                        })
+                    }
+                )i
+            },
             infiniteHandler($state)
             {
                 if (this.user) {
                     return axios.get(`/profiles/${this.user.username}?page=${this.page}`).then((response) => {
-                        this.tweets.push(...response.data.tweets.data)
-                        this.isLoading=false
-                    }).catch(error => console.log(error))
+                        if(response.data.tweets.data.length) {
+                            this.page += 1;
+                            this.tweets.push(...response.data.tweets.data)
+                            $state.loaded();
+                        }else {
+                            $state.complete();
+                        }
+
+                     }).catch(error => console.log(error))
                 }
                   axios.get(`/tweets/tweetdata?page=${this.page}`).then(
                     response => {
                         if(response.data.tweets.data.length) {
                             this.page += 1;
                             this.tweets.push(...response.data.tweets.data);
-                            console.log('worked!')
-                            console.log(response.data.tweets.data.length)
+
                             $state.loaded();
                         } else {
-                            console.log("i worked this time")
-                            $state.complete();
+                             $state.complete();
                         }
                     }
 
@@ -152,7 +160,7 @@
             dislike(tweetID) {
                 axios.delete(`/tweets/${tweetID}/like`).then(
                     (response) => {
-                        this.getTweets()
+                        this.refresh()
                     }
                 )
             },
@@ -160,7 +168,7 @@
             like(tweetID) {
                 axios.post(`/tweets/${tweetID}/like`).then(
                     () => {
-                        this.getTweets()
+                        this.getData()
                     }
                 ).catch(error => console.log(error));
             },
