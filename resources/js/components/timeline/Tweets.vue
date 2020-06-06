@@ -128,7 +128,7 @@
         },
         methods: {
 
-            getTweets() {
+            refresh() {
                 this.$emit('refresh')
             },
             like(tweetID) {

@@ -30,5 +30,6 @@
     {{$slot}}
 
 </div>
+
  </body>
 </html>

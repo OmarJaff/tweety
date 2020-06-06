@@ -49,6 +49,10 @@ Vue.directive('autofocus', autofocus);
 const store = new Vuex.Store(
     storeData
 )
+
+
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -74,7 +78,8 @@ Vue.component('tweet-with-replies', require('./components/timeline/TweetWithRepl
 Vue.component('publish-tweet-button', require('./components/publish-tweet-panal/PublishTweetButton').default);
 Vue.component('textarea-tweet', require('./components/publish-tweet-panal/TweetTextarea').default);
 Vue.component('vue-countable', require('vue-countable').default);
-Vue.component('InfiniteLoading', require('vue-infinite-loading').default);
+Vue.component('pull-to', require('vue-pull-to').default);
+
 
 bodyScrollLock
 /**
@@ -86,6 +91,6 @@ bodyScrollLock
 document.addEventListener('turbolinks:load', () => {
     const app = new Vue({
         el: '#app',
-        store,  //vuex
+         store,  //vuex
     });
 });

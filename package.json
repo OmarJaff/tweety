@@ -32,11 +32,15 @@
         "animate.css": "^3.7.2",
         "body-scroll-lock": "^3.0.2",
         "dayjs": "^1.8.26",
+        "install": "^0.13.0",
         "turbolinks": "^5.2.0",
         "vue-autofocus-directive": "^1.0.4",
         "vue-content-loader": "^0.2.3",
         "vue-countable": "^1.0.9",
-        "vue-infinite-loading": "^2.4.5",
+        "vue-infinite-scroll": "^2.0.2",
+        "vue-pull-to": "^0.1.8",
+        "vue-router": "^3.3.2",
+        "vue-scroll-behavior": "^0.2.0",
         "vue-turbolinks": "^2.1.0"
     }
 }
