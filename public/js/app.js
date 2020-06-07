@@ -2937,21 +2937,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getData: function getData() {
       var _this2 = this;
 
-      if (this.user) {
-        return axios.get("/profiles/".concat(this.user.username, "?page=").concat(this.page - 1)).then(function (response) {
-          var _this2$tweets;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!_this2.user) {
+                  _context3.next = 2;
+                  break;
+                }
 
-          new Set([(_this2$tweets = _this2.tweets).push.apply(_this2$tweets, _toConsumableArray(response.data.tweets.data))]);
-        })["catch"](function (error) {
-          return console.log(error);
-        });
-      }
+                return _context3.abrupt("return", axios.get("/profiles/".concat(_this2.user.username, "?page=").concat(_this2.page - 1)).then(function (response) {
+                  var _this2$tweets;
 
-      axios.get("/tweets/tweetdata?page=1").then(function (response) {
-        _this2.tweets = response.data.tweets.data;
-      })["catch"](function (error) {
-        return console.error();
-      });
+                  (_this2$tweets = _this2.tweets).push.apply(_this2$tweets, _toConsumableArray(response.data.tweets.data));
+                })["catch"](function (error) {
+                  return console.log(error);
+                }));
+
+              case 2:
+                axios.get("/tweets/tweetdata?page=1").then(function (response) {
+                  _this2.tweets = response.data.tweets.data;
+                })["catch"](function (error) {
+                  return console.error();
+                });
+
+              case 3:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
     },
     dislike: function dislike(tweetID) {
       var _this3 = this;

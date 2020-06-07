@@ -138,12 +138,12 @@
         },
         methods: {
 
-            getData() {
+           async getData() {
 
                 if (this.user) {
                     return axios.get(`/profiles/${this.user.username}?page=${this.page - 1}`).then((response) => {
 
-                        new Set([this.tweets.push(...response.data.tweets.data)]);
+                        this.tweets.push(...response.data.tweets.data);
 
 
                     }).catch(error => console.log(error))
