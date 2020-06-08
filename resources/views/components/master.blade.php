@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" data-turbolinks-track="true" defer></script>
+    <script src="{{ asset('js/app.js') }}" data-turbolinks-track="false" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com" data-turbolinks-track="true">

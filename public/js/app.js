@@ -2920,7 +2920,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'timeline',
@@ -2945,7 +2944,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       liked: '',
       disliked: '',
       isLoading: false,
-      lastPage: 1
+      lastPage: 1,
+      page: 1
     };
   },
   mounted: function mounted() {
@@ -2988,12 +2988,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context2.abrupt("return");
 
               case 2:
+                _this2.page = page;
+
                 if (!_this2.user) {
-                  _context2.next = 6;
+                  _context2.next = 7;
                   break;
                 }
 
-                _context2.next = 5;
+                _context2.next = 6;
                 return axios.get("/profiles/".concat(_this2.user.username, "?page=").concat(page)).then(function (response) {
                   var _this2$tweets;
 
@@ -3004,11 +3006,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return console.log(error);
                 });
 
-              case 5:
+              case 6:
                 return _context2.abrupt("return", _context2.sent);
 
-              case 6:
-                _context2.next = 8;
+              case 7:
+                _context2.next = 9;
                 return axios.get("/tweets/tweetdata?page=".concat(page)).then(function (response) {
                   var _this2$tweets2;
 
@@ -3019,7 +3021,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   return console.error();
                 });
 
-              case 8:
+              case 9:
               case "end":
                 return _context2.stop();
             }
@@ -3031,7 +3033,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       axios["delete"]("/tweets/".concat(tweetID, "/like")).then(function (response) {});
     },
     like: function like(tweetID) {
-      axios.post("/tweets/".concat(tweetID, "/like")).then(function () {})["catch"](function (error) {
+      var _this3 = this;
+
+      axios.post("/tweets/".concat(tweetID, "/like")).then(function () {
+        _this3.refreshData(_this3.page);
+      })["catch"](function (error) {
         return console.log(error);
       });
     }

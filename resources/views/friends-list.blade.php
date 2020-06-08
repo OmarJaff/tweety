@@ -1,4 +1,4 @@
-<div class="lg:w-1/5  justify-center bg-gray-200 border h-full  border-gray-300 px-6 py-4 rounded-lg hidden md:block">
+<div class="w-full flex flex-col fixed border-gray-300 px-6 py-4 rounded-lg bg-gray-200 border lg:w-1/6">
     <h1 class="font-bold mb-4 text-xl">Followings</h1>
     <ul class="px-2">
         @forelse(auth()->user()->follows as $user)

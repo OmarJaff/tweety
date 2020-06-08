@@ -21,7 +21,6 @@
         methods: {
             handleScrolledBottom(isVisible) {
                 if(!isVisible) {return;}
-
                 this.page++
                 this.$emit('fetch', this.page)
             },

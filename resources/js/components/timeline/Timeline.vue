@@ -5,7 +5,6 @@
 
         <div  v-if="tweets.total !== 0">
             <infinite-scroll :items="tweets" @fetch="fetchData">
-
               <tweets
                     @refresh="fetchData"
                     @like="like"
@@ -105,6 +104,7 @@
             disliked: '',
             isLoading: false,
              lastPage: 1,
+            page: 1,
          }),
 
        async mounted() {
@@ -117,6 +117,7 @@
 
            async fetchData(page) {
                if(page > this.lastPage) {return;}
+               this.page =page
                 if (this.user) {
                     return await axios.get(`/profiles/${this.user.username}?page=${page}`).then((response) => {
 
@@ -136,6 +137,7 @@
 
             },
 
+
             dislike(tweetID) {
                 axios.delete(`/tweets/${tweetID}/like`).then(
                     (response) => {
@@ -147,7 +149,7 @@
             like(tweetID) {
                 axios.post(`/tweets/${tweetID}/like`).then(
                     () => {
-
+                        this.refreshData(this.page)
                     }
                 ).catch(error => console.log(error));
             },
