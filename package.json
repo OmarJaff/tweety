@@ -37,6 +37,7 @@
         "vue-autofocus-directive": "^1.0.4",
         "vue-content-loader": "^0.2.3",
         "vue-countable": "^1.0.9",
+        "vue-observe-visibility": "^0.4.6",
         "vue-pull-to": "^0.1.8",
         "vue-router": "^3.3.2",
         "vue-scroll-behavior": "^0.2.0",

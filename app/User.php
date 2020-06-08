@@ -49,7 +49,7 @@ class User extends Authenticatable
             ->orWhere('user_id', $this->id)->withCount(['likesNumber','dislikes'])
              ->with(['user:id,username,avatar,name','likes:id,user_id,tweet_id,liked'])
              ->with(['replies'])->withCount('replies')
-            ->latest()->paginate(10);
+            ->latest()->paginate(50);
     }
 
     public function tweets()

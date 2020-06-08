@@ -24,6 +24,10 @@
                     <h1 class="text-gray-600 mt-2 text-whitespace-no-wrap text-nowrap">No followings yet</h1>
             </li>
         @endforelse
-{{--    <friends-list ></friends-list>--}}
-    </ul>
+     </ul>
+
+
+
+
+
 </div>

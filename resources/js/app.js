@@ -50,7 +50,9 @@ const store = new Vuex.Store(
     storeData
 )
 
+import VueObserveVisibility from 'vue-observe-visibility'
 
+Vue.use(VueObserveVisibility)
 
 
 /**
@@ -79,7 +81,8 @@ Vue.component('publish-tweet-button', require('./components/publish-tweet-panal/
 Vue.component('textarea-tweet', require('./components/publish-tweet-panal/TweetTextarea').default);
 Vue.component('vue-countable', require('vue-countable').default);
 Vue.component('pull-to', require('vue-pull-to').default);
-
+Vue.component('infinite-scroll', require('./components/Infinite-scroll/InfiniteScroll').default);
+Vue.component('input-search', require('./components/input-search').default);
 
 bodyScrollLock
 /**

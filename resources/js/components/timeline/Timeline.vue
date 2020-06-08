@@ -4,21 +4,21 @@
         </FacebookLoader>
 
         <div  v-if="tweets.total !== 0">
+            <infinite-scroll :items="tweets" @fetch="fetchData">
 
-
-
-            <tweets
-                    @refresh="getData"
+              <tweets
+                    @refresh="fetchData"
                     @like="like"
                     @dislike="dislike"
                      :tweets="tweets"
                      :userId="currentUser">
 
             </tweets>
-
-
+             </infinite-scroll>
 
         </div>
+
+
 
 
             <div v-else-if="user && tweets.total === 0" class="container">
@@ -73,6 +73,7 @@
         </div>
 
     </div>
+
 </template>
 
 <script>
@@ -103,63 +104,42 @@
             liked: '',
             disliked: '',
             isLoading: false,
-            page: 2,
-            infiniteId: +new Date()
-        }),
-
-        created() {
-            this.isLoading=true;
-            this.getData()
-            this.isLoading=false;
-        },
+             lastPage: 1,
+         }),
 
        async mounted() {
-           window.addEventListener('scroll', async (e) => {
-               if(window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
-                   console.log('bottom of the page!')
-                   if (this.user) {
-                       return axios.get(`/profiles/${this.user.username}?page=${this.page}`).then((response) => {
-                           this.tweets.push(...response.data.tweets.data)
-                           this.page += 1
-                       }).catch(error => console.log(error))
-                   }
+           this.isLoading=true;
+            await this.fetchData(1);
+           this.isLoading=false;
+        },
 
-                   return  axios.get(`/tweets/tweetdata?page=${this.page}`).then(
-                       response => {
-                           this.tweets.push(...response.data.tweets.data);
-                           this.page += 1
-                       }
-                   ).catch(error => console.error())
-               }
-           })
-        },
-        activated() {
-            console.log('worked')
-        },
         methods: {
 
-           async getData() {
-
+           async fetchData(page) {
+               if(page > this.lastPage) {return;}
                 if (this.user) {
-                    return axios.get(`/profiles/${this.user.username}?page=${this.page - 1}`).then((response) => {
+                    return await axios.get(`/profiles/${this.user.username}?page=${page}`).then((response) => {
 
                         this.tweets.push(...response.data.tweets.data);
+                        this.lastPage = response.data.tweets.last_page;
 
 
                     }).catch(error => console.log(error))
                 }
 
-                axios.get(`/tweets/tweetdata?page=1`).then(
+              await axios.get(`/tweets/tweetdata?page=${page}`).then(
                     response => {
-                            this.tweets =response.data.tweets.data;
-                    }
+                            this.tweets.push(...response.data.tweets.data);
+                             this.lastPage = response.data.tweets.last_page;
+                     }
                 ).catch(error => console.error())
+
             },
 
             dislike(tweetID) {
                 axios.delete(`/tweets/${tweetID}/like`).then(
                     (response) => {
-                        this.getData()
+
                     }
                 )
             },
@@ -167,7 +147,7 @@
             like(tweetID) {
                 axios.post(`/tweets/${tweetID}/like`).then(
                     () => {
-                        this.getData()
+
                     }
                 ).catch(error => console.log(error));
             },
