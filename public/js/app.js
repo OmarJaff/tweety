@@ -3247,15 +3247,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'tweet-with-replies',
   props: {
@@ -43734,44 +43725,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "p-4 flex" }, [
-      _c(
-        "a",
-        {
-          staticClass: "flex items-center space-x-2",
-          attrs: { href: "/tweets" }
-        },
-        [
-          _c(
-            "svg",
-            {
-              staticClass: "text-gray-600",
-              attrs: {
-                width: "20",
-                height: "20",
-                viewBox: "0 0 20 20",
-                fill: "currentColor",
-                xmlns: "http://www.w3.org/2000/svg"
-              }
-            },
-            [
-              _c("path", {
-                attrs: {
-                  "fill-rule": "evenodd",
-                  "clip-rule": "evenodd",
-                  d:
-                    "M7.70711 14.7071C7.31658 15.0976 6.68342 15.0976 6.29289 14.7071L2.29289 10.7071C1.90237 10.3166 1.90237 9.68342 2.29289 9.29289L6.29289 5.29289C6.68342 4.90237 7.31658 4.90237 7.70711 5.29289C8.09763 5.68342 8.09763 6.31658 7.70711 6.70711L5.41421 9L17 9C17.5523 9 18 9.44771 18 10C18 10.5523 17.5523 11 17 11L5.41421 11L7.70711 13.2929C8.09763 13.6834 8.09763 14.3166 7.70711 14.7071Z",
-                  fill: "currentColor"
-                }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("h1", { staticClass: "text-gray-600" }, [_vm._v("Back to tweets")])
-        ]
-      )
-    ]),
-    _vm._v(" "),
     _c(
       "div",
       {
